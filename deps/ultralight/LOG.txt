@@ -1,0 +1,14 @@
+4f91a4a Enabled bmalloc (WebKit's native slab allocator, should give slight performance improvement. Also fixed link error when using standalone SDK on Windows.
+7a80403 Moved deps dir to CMAKE_CURRENT_BINARY_DIR so we don't pollute non-build directories.
+c341ea7 Fix crash in MemoryPool when allocating more elements than the BlockSize. (UltralightCore @ 4f6930f)
+93902db Adding explicit 16px font size to root element in default stylsheet to match Chrome desktop behavior (also explicit transparent background color). (WebCore @ ac8a715)
+6124acf Fixed rendering issue in path stroke tessellator, added support for stroked SVG rects.
+8a74816 Rewrote tessellator for stroked paths, now handles degenerate collinear cases more gracefully. Fixes #118
+c371f66 Fix crash when clicking on select elements (dropdowns), please note select elements are only stubbed out for now and will not display. Need to provide a Platform API for users to display floating popup menus. Fixes #121.
+0d58e08 Fixed link error on Linux: undefined reference to ultralight::CreatePlatformFontLoader(), updated README
+46aabe8 Updating README with instructions to download latest SDK.
+2ccf477 Updating Jenkinsfile (working on continous delivery).
+44f23c5 Updating packager scripts.
+d80a9a5 Added inspector support to the Browser sample, updated deps.
+7e9cf3a Updating UltralightCore revision, fixes #119
+fbe253b Pruned repo history to get rid of 200MB of stale binaries. Repo has now been restructured to pull binaries in from S3 buckets during CMake build.

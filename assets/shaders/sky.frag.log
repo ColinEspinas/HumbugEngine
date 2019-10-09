@@ -1,0 +1,2 @@
+0(6) : warning C1503: undefined variable "atmosphere"
+0(18) : error C1008: undefined variable "atmosphere"
