@@ -7,8 +7,8 @@
 Object::Object() :
   pos(0.0f),
   euler(0.0f),
-  scale(1.0f),
-  p_scale(1.0f) {
+  scale(1.0f)
+  /*p_scale(1.0f)*/ {
 	// if (!material) material = std::make_shared<Material>("__Default");
 }
 
@@ -16,7 +16,7 @@ void Object::Reset() {
   pos.SetZero();
   euler.SetZero();
   scale.SetOnes();
-  p_scale = 1.0f;
+  //p_scale = 1.0f;
 }
 
 void Object::Draw(const Camera& cam, uint32_t curFBO) {
@@ -34,10 +34,6 @@ void Object::Draw(const Camera& cam, uint32_t curFBO) {
 	shader->SetMVP(mvp.m, mv.m);
 	mesh->Draw();
   }
-}
-
-template<class C> std::shared_ptr<Component> Object::GetComponent() {
-
 }
 
 Vector3 Object::Forward() const {
