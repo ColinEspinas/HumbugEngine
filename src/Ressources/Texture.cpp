@@ -1,14 +1,27 @@
-#include "HumbugEngine/Texture.h"
+#include "HumbugEngine/Ressources/Texture.h"
 #include <fstream>
 #include <cassert>
 
-Texture::Texture(const char* fname, int rows, int cols) {
+Texture::Texture(std::string fname, int rows, int cols) {
   //Check if this is a 3D texture
   assert(rows >= 1 && cols >= 1);
   is3D = (rows > 1 || cols > 1);
 
+  this->_Load(fname);
+}
+
+void Texture::Use() {
+  if (is3D) {
+    glBindTexture(GL_TEXTURE_2D_ARRAY, texId);
+  } else {
+    glBindTexture(GL_TEXTURE_2D, texId);
+  }
+}
+
+void override _Load(std::string _path)
+{
   //Open the bitmap
-  std::ifstream fin(std::string("assets/textures/") + fname, std::ios::in | std::ios::binary);
+  std::ifstream fin(std::string("assets/textures/") + _path.c_str(), std::ios::in | std::ios::binary);
   if (!fin) {
     texId = 0;
     return;
@@ -62,12 +75,4 @@ Texture::Texture(const char* fname, int rows, int cols) {
 
   //Clenup
   delete[] img;
-}
-
-void Texture::Use() {
-  if (is3D) {
-    glBindTexture(GL_TEXTURE_2D_ARRAY, texId);
-  } else {
-    glBindTexture(GL_TEXTURE_2D, texId);
-  }
 }

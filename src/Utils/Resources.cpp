@@ -1,4 +1,4 @@
-#include "HumbugEngine/Resources.h"
+#include "HumbugEngine/Utils/Resources.h"
 #include <unordered_map>
 
 std::shared_ptr<Mesh> AquireMesh(const char* name) {

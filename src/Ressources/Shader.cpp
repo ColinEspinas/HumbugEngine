@@ -1,4 +1,4 @@
-#include "HumbugEngine/Shader.h"
+#include "HumbugEngine/Ressources/Shader.h"
 #include <fstream>
 #include <sstream>
 
@@ -59,6 +59,11 @@ Shader::~Shader() {
 
 void Shader::Use() {
   glUseProgram(progId);
+}
+
+void Shader::_Load(std::string _path)
+{
+  // TODO
 }
 
 GLuint Shader::LoadShader(const char* fname, GLenum type) {

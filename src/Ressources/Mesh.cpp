@@ -1,13 +1,20 @@
-#include "HumbugEngine/Mesh.h"
+#include "HumbugEngine/Ressources/Mesh.h"
+
 #include "HumbugEngine/Vector.h"
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <cassert>
 
-Mesh::Mesh(const char* fname) {
+Mesh::Mesh(std::string _path)
+  : Ressource("Mesh", _path)
+{
+  this->_Load(_path);
+}
+
+void Mesh::_Load(std::string _path) {
   //Open the file for reading
-  std::ifstream fin(std::string("assets/meshes/") + fname);
+  std::ifstream fin(std::string("assets/meshes/") + _path.c_str());
   if (!fin) {
     return;
   }
@@ -187,9 +194,10 @@ Mesh::Mesh(const char* fname) {
 
   //for (auto S : material_name_palette) std::cout << S << std::endl; //DEBUG
   //for (auto M : material_palette) M.Print(); //DEBUG
+}
 
-  std::vector<float> color = { 1.0f,1.0f,1.0f };
-
+void Mesh::Use()
+{
   //Setup GL
   glGenVertexArrays(1, &vao);
   glBindVertexArray(vao);
@@ -212,11 +220,6 @@ Mesh::Mesh(const char* fname) {
     glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(normals[0]), normals.data(), GL_STATIC_DRAW);
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
-  }
-  {
-	  // TO MODIFY -----------------------------------------
-	  glBindBuffer(GL_ARRAY_BUFFER, vbo[3]);
-	  glBufferData(GL_ARRAY_BUFFER, color.size() * sizeof(color[0]), color.data(), GL_STATIC_DRAW);
   }
 }
 

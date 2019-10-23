@@ -12,6 +12,9 @@ protected:
 public:
 	Ressource(std::string _name, std::string _path);
 
-	void Load(std::string newPath = "");
+	std::string getName() const;
+	std::string getPath() const;
+
+	void Load(std::string newPath = "", bool UseOnLoad = true);
 	virtual void Use() = 0;
 };

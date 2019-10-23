@@ -1,7 +1,7 @@
 #pragma once
-#include "HumbugEngine/Mesh.h"
-#include "HumbugEngine/Texture.h"
-#include "HumbugEngine/Shader.h"
+#include "HumbugEngine/Ressources/Mesh.h"
+#include "HumbugEngine/Ressources/Texture.h"
+#include "HumbugEngine/Ressources/Shader.h"
 #include <memory>
 
 std::shared_ptr<Mesh> AquireMesh(const char* name);
