@@ -1,6 +1,6 @@
 #pragma once
 #include "HumbugEngine/GameHeader.h"
-#include "HumbugEngine/Object.h"
+#include "HumbugEngine/Objects/Object.h"
 #include "HumbugEngine/FrameBuffer.h"
 #include "HumbugEngine/Mesh.h"
 #include "HumbugEngine/Resources.h"

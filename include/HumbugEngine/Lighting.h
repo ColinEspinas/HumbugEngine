@@ -2,7 +2,7 @@
 #include "HumbugEngine/Light.h"
 #include "HumbugEngine/PointLight.h"
 #include "HumbugEngine/DirLight.h"
-#include "HumbugEngine/Object.h"
+#include "HumbugEngine/Objects/Object.h"
 #include "HumbugEngine/Shader.h"
 #include "HumbugEngine/Resources.h"
 #include <vector>

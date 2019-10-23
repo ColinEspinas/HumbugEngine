@@ -52,6 +52,9 @@ public:
 	void RemoveComponent(std::string name);
 	template<class C = Component> void RemoveComponent();
 	void RemoveComponent(std::shared_ptr<Component> c);
+	// Remove ComponentS
+	void RemoveComponents(std::string name);
+	template<class C = Component> void RemoveComponents();
 
 
 	// Debug:
@@ -138,9 +141,9 @@ inline void Object::AddComponent(std::shared_ptr<Component> c)
 
 inline void Object::RemoveComponent(std::string name)
 {
-	for (auto component : m_components) {
-		if (component->GetName() == name) {
-			m_components.erase(component);
+	for (int ii = 0; ii < m_components.size(); ii++) {
+		if (m_components[ii]->GetName() == name) {
+			m_components.erase(m_components.begin() + ii);
 			return;
 		}
 	}
@@ -159,10 +162,31 @@ inline void Object::RemoveComponent()
 
 inline void Object::RemoveComponent(std::shared_ptr<Component> c)
 {
-	for (auto component : m_components) {
-		if (component == c) {
-			m_components.erase(component);
+	for (int ii = 0; ii < m_components.size(); ii++) {
+		if (m_components[ii] == c) {
+			m_components.erase(m_components.begin() + ii);
 			return;
 		}
+	}
+}
+
+inline void Object::RemoveComponents(std::string name)
+{
+	for (int ii = 0; ii < m_components.size(); ii)
+	{
+		if (m_components[ii]->GetName() == name)
+			m_components.erase(m_components.begin() + ii);
+		else ii++;
+	}
+}
+
+template<class C>
+inline void Object::RemoveComponents()
+{
+	for (int ii = 0; ii < m_components.size(); ii)
+	{
+		if (std::dynamic_pointer_cast<C>(m_components[ii]))
+			m_components.erase(m_components.begin() + ii);
+		else ii++;
 	}
 }

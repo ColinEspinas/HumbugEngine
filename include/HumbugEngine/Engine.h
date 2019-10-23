@@ -2,7 +2,7 @@
 #include "HumbugEngine/GameHeader.h"
 #include "HumbugEngine/Camera.h"
 #include "HumbugEngine/Input.h"
-#include "HumbugEngine/Object.h"
+#include "HumbugEngine/Objects/Object.h"
 #include "HumbugEngine/Portal.h"
 #include "HumbugEngine/Player.h"
 #include "HumbugEngine/Timer.h"

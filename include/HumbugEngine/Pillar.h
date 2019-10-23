@@ -1,5 +1,5 @@
 #pragma once
-#include "HumbugEngine/Object.h"
+#include "HumbugEngine/Objects/Object.h"
 #include "HumbugEngine/Resources.h"
 
 class Pillar : public Object {

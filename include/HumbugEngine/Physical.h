@@ -1,5 +1,5 @@
 #pragma once
-#include "HumbugEngine/Object.h"
+#include "HumbugEngine/Objects/Object.h"
 #include "HumbugEngine/Portal.h"
 #include "HumbugEngine/Sphere.h"
 
@@ -13,13 +13,13 @@ public:
   virtual void OnCollide(Object& other, const Vector3& push);
 
   void SetPosition(const Vector3& _pos) {
-    pos = _pos;
+    m_pos = _pos;
     prev_pos = _pos;
   }
 
   bool TryPortal(const Portal& portal);
 
-  virtual Physical* AsPhysical() override { return this; }
+  virtual Physical* AsPhysical() { return this; }
 
   Vector3 gravity;
   Vector3 velocity;
