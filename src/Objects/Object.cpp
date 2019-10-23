@@ -5,17 +5,17 @@
 // #include "HumbugEngine/Player.h"
 
 Object::Object() :
-  pos(0.0f),
-  euler(0.0f),
-  scale(1.0f)
+  m_pos(0.0f),
+  m_euler(0.0f),
+  m_scale(1.0f)
   /*p_scale(1.0f)*/ {
 	// if (!material) material = std::make_shared<Material>("__Default");
 }
 
 void Object::Reset() {
-  pos.SetZero();
-  euler.SetZero();
-  scale.SetOnes();
+  m_pos.SetZero();
+  m_euler.SetZero();
+  m_scale.SetOnes();
   //p_scale = 1.0f;
 }
 
@@ -37,15 +37,15 @@ void Object::Draw(const Camera& cam, uint32_t curFBO) {
 }
 
 Vector3 Object::Forward() const {
-  return -(Matrix4::RotZ(euler.z) * Matrix4::RotX(euler.x) * Matrix4::RotY(euler.y)).ZAxis();
+  return -(Matrix4::RotZ(m_euler.z) * Matrix4::RotX(m_euler.x) * Matrix4::RotY(m_euler.y)).ZAxis();
 }
 
 Matrix4 Object::LocalToWorld() const {
-  return Matrix4::Trans(pos) * Matrix4::RotY(euler.y) * Matrix4::RotX(euler.x) * Matrix4::RotZ(euler.z) * Matrix4::Scale(scale * p_scale);
+  return Matrix4::Trans(m_pos) * Matrix4::RotY(m_euler.y) * Matrix4::RotX(m_euler.x) * Matrix4::RotZ(m_euler.z) * Matrix4::Scale(m_scale * p_scale);
 }
 
 Matrix4 Object::WorldToLocal() const {
-  return Matrix4::Scale(1.0f / (scale * p_scale)) * Matrix4::RotZ(-euler.z) * Matrix4::RotX(-euler.x) * Matrix4::RotY(-euler.y) * Matrix4::Trans(-pos);
+  return Matrix4::Scale(1.0f / (m_scale * p_scale)) * Matrix4::RotZ(-m_euler.z) * Matrix4::RotX(-m_euler.x) * Matrix4::RotY(-m_euler.y) * Matrix4::Trans(-m_pos);
 }
 
 void Object::DebugDraw(const Camera& cam) {

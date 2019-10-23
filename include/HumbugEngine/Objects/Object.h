@@ -46,7 +46,7 @@ public:
 	template<class C = Component> PComponentVec GetComponents();
 	// Add component
 	//void AddComponent(std::string name);
-	template<class C = Component> void AddComponent();
+	template<class C = Component, class ...Args> void AddComponent(Args... args);
 	void AddComponent(std::shared_ptr<Component> c);
 	// Remove Component
 	void RemoveComponent(std::string name);
@@ -126,10 +126,10 @@ inline PComponentVec Object::GetComponents()
 	return comps;
 }
 
-template<class C>
-inline void Object::AddComponent()
+template<class C, class ...Args>
+inline void Object::AddComponent(Args... args)
 {
-	m_components.push_back(std::make_shared<C>());
+	m_components.push_back(std::make_shared<C>(args));
 }
 
 inline void Object::AddComponent(std::shared_ptr<Component> c)
