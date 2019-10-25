@@ -2,7 +2,7 @@
 #include "HumbugEngine/Ressources/Ressource.h"
 #include "HumbugEngine/Ressources/Shader.h"
 
-#include "HumbugEngine/Vector.h"
+#include "HumbugEngine/Utils/Vector.h"
 #include <string>
 #include <iostream>
 

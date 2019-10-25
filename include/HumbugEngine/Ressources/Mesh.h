@@ -1,9 +1,8 @@
 #pragma once
 #include "HumbugEngine/Ressources/Ressource.h"
 #include "HumbugEngine/Ressources/Material.h"
-
-#include "HumbugEngine/Collider.h"
-#include "HumbugEngine/Camera.h"
+#include "HumbugEngine/Components/Collider.h"
+#include "HumbugEngine/Components/Camera.h"
 #include <GL/glew.h>
 #include <vector>
 #include <map>

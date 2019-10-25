@@ -1,9 +1,8 @@
 #pragma once
 #include "HumbugEngine/Ressources/Ressource.h"
-
+#include "HumbugEngine/Utils/Vector.h"
 #include <GL/glew.h>
 #include <vector>
-#include "HumbugEngine/Vector.h"
 
 class Shader : public Ressource {
 public:

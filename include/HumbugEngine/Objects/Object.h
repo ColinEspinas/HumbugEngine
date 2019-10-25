@@ -1,8 +1,8 @@
 #pragma once
-#include "HumbugEngine/GameHeader.h"
-#include "HumbugEngine/Vector.h"
-#include "HumbugEngine/Camera.h"
-#include "HumbugEngine/Sphere.h"
+#include "HumbugEngine/Utils/GameHeader.h"
+#include "HumbugEngine/Utils/Vector.h"
+#include "HumbugEngine/Components/Camera.h"
+#include "HumbugEngine/Ressources/Sphere.h"
 #include "HumbugEngine/Components/Component.h"
 #include <string>
 #include <vector>
