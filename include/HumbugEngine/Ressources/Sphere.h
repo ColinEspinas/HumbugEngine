@@ -5,8 +5,8 @@
 
 class Sphere : public Ressource {
 public:
-  Sphere(float r=1.0f) : center(0.0f), radius(r) {}
-  Sphere(const Vector3& pos, float r) : center(pos), radius(r) {}
+  Sphere(float r=1.0f) : center(0.0f), radius(r), Ressource("Sphere","") {}
+  Sphere(const Vector3& pos, float r) : center(pos), radius(r), Ressource("Sphere","") {}
 
   //Transformations to and frpom sphere coordinates
   Matrix4 UnitToLocal() const {

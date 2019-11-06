@@ -18,6 +18,9 @@ class Material;
 class Object {
 protected:
 	PComponentVec m_components;
+
+	virtual bool allowForComponents() { return true; }
+
 public:
 	Vector3 m_pos;
 	Vector3 m_euler;
@@ -61,7 +64,6 @@ public:
 
 	void DebugDraw(const Camera& cam);
 
-
 	// Pos info:
 
 	Matrix4 LocalToWorld() const;
@@ -84,6 +86,8 @@ typedef std::vector<std::shared_ptr<Object>> PObjectVec;
 
 inline std::shared_ptr<Component> Object::GetComponent(std::string name)
 {
+	if (!allowForComponents()) return nullptr;
+
 	for (auto component : m_components) {
 		if (component->GetName() == name) {
 			return component;
@@ -95,6 +99,8 @@ inline std::shared_ptr<Component> Object::GetComponent(std::string name)
 template<class C>
 inline std::shared_ptr<Component> Object::GetComponent()
 {
+	if (!allowForComponents()) return nullptr;
+
 	for (auto component : m_components) {
 		if (std::dynamic_pointer_cast<C>(component)) {
 			return component;
@@ -105,6 +111,8 @@ inline std::shared_ptr<Component> Object::GetComponent()
 
 inline PComponentVec Object::GetComponents(std::string name)
 {
+	if (!allowForComponents()) return PComponentVec(0);
+
 	PComponentVec comps;
 	for (auto component : m_components) {
 		if (component->GetName() == name) {
@@ -117,6 +125,8 @@ inline PComponentVec Object::GetComponents(std::string name)
 template<class C>
 inline PComponentVec Object::GetComponents()
 {
+	if (!allowForComponents()) return PComponentVec(0);
+
 	PComponentVec comps;
 	for (auto component : m_components) {
 		if (std::dynamic_pointer_cast<C>(component)) {
@@ -129,11 +139,15 @@ inline PComponentVec Object::GetComponents()
 template<class C, class ...Args>
 inline void Object::AddComponent(Args... args)
 {
+	if (!allowForComponents()) return;
+
 	m_components.push_back(std::make_shared<C>(args));
 }
 
 inline void Object::AddComponent(std::shared_ptr<Component> c)
 {
+	if (!allowForComponents()) return;
+
 	if (c != nullptr) {
 		m_components.push_back(c);
 	}
@@ -141,6 +155,8 @@ inline void Object::AddComponent(std::shared_ptr<Component> c)
 
 inline void Object::RemoveComponent(std::string name)
 {
+	if (!allowForComponents()) return;
+
 	for (int ii = 0; ii < m_components.size(); ii++) {
 		if (m_components[ii]->GetName() == name) {
 			m_components.erase(m_components.begin() + ii);
@@ -152,6 +168,8 @@ inline void Object::RemoveComponent(std::string name)
 template<class C>
 inline void Object::RemoveComponent()
 {
+	if (!allowForComponents()) return;
+
 	for (auto component : m_components) {
 		if (std::dynamic_pointer_cast<C>(component)) {
 			m_components.erase(component);
@@ -162,6 +180,8 @@ inline void Object::RemoveComponent()
 
 inline void Object::RemoveComponent(std::shared_ptr<Component> c)
 {
+	if (!allowForComponents()) return;
+
 	for (int ii = 0; ii < m_components.size(); ii++) {
 		if (m_components[ii] == c) {
 			m_components.erase(m_components.begin() + ii);
@@ -172,6 +192,8 @@ inline void Object::RemoveComponent(std::shared_ptr<Component> c)
 
 inline void Object::RemoveComponents(std::string name)
 {
+	if (!allowForComponents()) return;
+
 	for (int ii = 0; ii < m_components.size(); ii)
 	{
 		if (m_components[ii]->GetName() == name)
@@ -183,6 +205,8 @@ inline void Object::RemoveComponents(std::string name)
 template<class C>
 inline void Object::RemoveComponents()
 {
+	if (!allowForComponents()) return;
+	
 	for (int ii = 0; ii < m_components.size(); ii)
 	{
 		if (std::dynamic_pointer_cast<C>(m_components[ii]))

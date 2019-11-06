@@ -1,4 +1,4 @@
-#include "HumbugEngine/Entity.h"
+#include "HumbugEngine/Physics/Entity.h"
 
 Entity::Entity(std::shared_ptr<Object>& obj, std::shared_ptr<PhysicRuleset>& pR)
 	: physics(pR)

@@ -1,6 +1,6 @@
 #pragma once
 #include "HumbugEngine/Objects/Object.h"
-#include "HumbugEngine/Resources.h"
+#include "HumbugEngine/Utils/Resources.h"
 
 class Pillar : public Object {
 public:
@@ -8,7 +8,7 @@ public:
     mesh = AquireMesh("pillar.obj");
     shader = AquireShader("texture");
     texture = AquireTexture("white.bmp");
-    scale = Vector3(0.1f);
+    m_scale = Vector3(0.1f);
   }
   virtual ~Pillar() {}
 };

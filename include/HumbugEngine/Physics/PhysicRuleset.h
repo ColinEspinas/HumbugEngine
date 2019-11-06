@@ -1,6 +1,6 @@
 #pragma once
-#include "HumbugEngine/Physical.h"
-#include "HumbugEngine/Vector.h"
+#include "HumbugEngine/Physics/Physical.h"
+#include "HumbugEngine/Utils/Vector.h"
 
 class Entity;
 

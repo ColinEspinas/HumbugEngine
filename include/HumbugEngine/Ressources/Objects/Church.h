@@ -1,6 +1,6 @@
 #pragma once
-#include "..\..\Object.h"
-#include "..\..\Resources.h"
+#include "HumbugEngine/Objects/Object.h"
+#include "HumbugEngine/Utils/Resources.h"
 
 class Church : public Object
 {
@@ -10,7 +10,7 @@ public:
 		mesh = AquireMesh("Church.obj");
 		shader = AquireShader("texture");
 		texture = AquireTexture("white.bmp");
-		scale = Vector3(1e-2f);
+		m_scale = Vector3(1e-2f);
 	}
 	virtual ~Church() {}
 };

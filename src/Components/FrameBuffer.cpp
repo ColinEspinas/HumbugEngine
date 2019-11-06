@@ -1,6 +1,6 @@
 #include "HumbugEngine/Components/FrameBuffer.h"
 #include "HumbugEngine/Utils/GameHeader.h"
-#include "HumbugEngine/Engine.h"
+#include "HumbugEngine/Core/Engine.h"
 #include <iostream>
 
 FrameBuffer::FrameBuffer()

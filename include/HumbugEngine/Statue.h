@@ -1,6 +1,6 @@
 #pragma once
 #include "HumbugEngine/Objects/Object.h"
-#include "HumbugEngine/Resources.h"
+#include "HumbugEngine/Utils/Resources.h"
 
 class Statue : public Object {
 public:

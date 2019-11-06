@@ -1,6 +1,6 @@
 #pragma once
 #include "HumbugEngine/Objects/Object.h"
-#include "HumbugEngine/Resources.h"
+#include "HumbugEngine/Utils/Resources.h"
 
 class Ground : public Object {
 public:
@@ -12,7 +12,7 @@ public:
     }
     shader = AquireShader("texture");
     texture = AquireTexture("checker_green.bmp");
-    scale = Vector3(10, 1, 10);
+    m_scale = Vector3(10, 1, 10);
   }
   virtual ~Ground() {}
 };

@@ -1,6 +1,6 @@
 #pragma once
-#include "..\..\..\Object.h"
-#include "..\..\..\Resources.h"
+#include "HumbugEngine/Objects/Object.h"
+#include "HumbugEngine/Utils/Resources.h"
 
 // Maze Room Interface
 class MazeRoom : public Object
@@ -18,8 +18,8 @@ public:
 		mesh = AquireMesh("MazeRoom/Maze000.obj");
 		shader = AquireShader("texture");
 		texture = AquireTexture("Bush.bmp");
-		scale = Vector3(2.5f);
-		euler += Vector3(3 * GH_PI / 2, 0, 0);
+		m_scale = Vector3(2.5f);
+		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
 	virtual ~MazeRoom_0() {}
 	int ID() const override { return 0; }
@@ -34,8 +34,8 @@ public:
 		mesh = AquireMesh("MazeRoom/Maze001.obj");
 		shader = AquireShader("texture");
 		texture = AquireTexture("Bush.bmp");
-		scale = Vector3(2.5f);
-		euler += Vector3(3 * GH_PI / 2, 0, 0);
+		m_scale = Vector3(2.5f);
+		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
 	virtual ~MazeRoom_1() {}
 	int ID() const override { return 8; }
@@ -50,8 +50,8 @@ public:
 		mesh = AquireMesh("MazeRoom/Maze002.obj");
 		shader = AquireShader("texture");
 		texture = AquireTexture("Bush.bmp");
-		scale = Vector3(2.5f);
-		euler += Vector3(3 * GH_PI / 2, 0, 0);
+		m_scale = Vector3(2.5f);
+		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
 	virtual ~MazeRoom_2() {}
 	int ID() const override { return 3; }
@@ -66,8 +66,8 @@ public:
 		mesh = AquireMesh("MazeRoom/Maze003.obj");
 		shader = AquireShader("texture");
 		texture = AquireTexture("Bush.bmp");
-		scale = Vector3(2.5f);
-		euler += Vector3(3 * GH_PI / 2, 0, 0);
+		m_scale = Vector3(2.5f);
+		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
 	virtual ~MazeRoom_3() {}
 	int ID() const override { return 10; }
@@ -82,8 +82,8 @@ public:
 		mesh = AquireMesh("MazeRoom/Maze004.obj");
 		shader = AquireShader("texture");
 		texture = AquireTexture("Bush.bmp");
-		scale = Vector3(2.5f);
-		euler += Vector3(3 * GH_PI / 2, 0, 0);
+		m_scale = Vector3(2.5f);
+		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
 	virtual ~MazeRoom_4() {}
 	int ID() const override { return 11; }
@@ -98,8 +98,8 @@ public:
 		mesh = AquireMesh("MazeRoom/Maze005.obj");
 		shader = AquireShader("texture");
 		texture = AquireTexture("Bush.bmp");
-		scale = Vector3(2.5f);
-		euler += Vector3(3 * GH_PI / 2, 0, 0);
+		m_scale = Vector3(2.5f);
+		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
 	virtual ~MazeRoom_5() {}
 	int ID() const override { return 15; }

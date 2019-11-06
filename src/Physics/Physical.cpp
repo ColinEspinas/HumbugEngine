@@ -1,5 +1,5 @@
-#include "HumbugEngine/Physical.h"
-#include "HumbugEngine/GameHeader.h"
+#include "HumbugEngine/Physics/Physical.h"
+#include "HumbugEngine/Utils/GameHeader.h"
 
 Physical::Physical() {
   Reset();
@@ -17,15 +17,15 @@ void Physical::Reset() {
 }
 
 void Physical::Update() {
-  prev_pos = pos;
+  prev_pos = m_pos;
   velocity += gravity * p_scale * GH_DT;
   velocity *= (1.0f - drag);
-  pos += velocity * GH_DT;
+  m_pos += velocity * GH_DT;
 }
 
 void Physical::OnCollide(Object& other, const Vector3& push) {
   //Update position to avoid collision
-  pos += push;
+  m_pos += push;
 
   //Ignore push if delta is too small
   if (push.MagSq() < 1e-8f * p_scale) {
@@ -46,17 +46,17 @@ void Physical::OnCollide(Object& other, const Vector3& push) {
 
 bool Physical::TryPortal(const Portal& portal) {
   const Vector3 bump = portal.GetBump(prev_pos) * (2 * GH_NEAR_MIN * p_scale);
-  const Portal::Warp* warp = portal.Intersects(prev_pos, pos, bump);
+  const Portal::Warp* warp = portal.Intersects(prev_pos, m_pos, bump);
   if (warp) {
     //Teleport object
-    pos = warp->deltaInv.MulPoint(pos - bump * 2);
+    m_pos = warp->deltaInv.MulPoint(m_pos - bump * 2);
     velocity = warp->deltaInv.MulDirection(velocity);
-    prev_pos = pos;
+    prev_pos = m_pos;
 
     //Update camera direction
-    const Vector3 forward(-std::sin(euler.y), 0, -std::cos(euler.y));
+    const Vector3 forward(-std::sin(m_euler.y), 0, -std::cos(m_euler.y));
     const Vector3 newDir = warp->deltaInv.MulDirection(forward);
-    euler.y = -std::atan2(newDir.x, -newDir.z);
+    m_euler.y = -std::atan2(newDir.x, -newDir.z);
 
     //Update object scale
     p_scale *= warp->deltaInv.XAxis().Mag();

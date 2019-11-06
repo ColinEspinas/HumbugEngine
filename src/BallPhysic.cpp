@@ -1,4 +1,4 @@
-#include "HumbugEngine/Physics/BallPhysic.h"
+#include "HumbugEngine/BallPhysic.h"
 
 BallPhysic::BallPhysic(Entity* phy)
 	: PhysicRuleset(phy)

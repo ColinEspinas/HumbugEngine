@@ -1,7 +1,7 @@
 #include "HumbugEngine/Objects/Object.h"
-#include "HumbugEngine/Mesh.h"
-#include "HumbugEngine/Shader.h"
-#include "HumbugEngine/Texture.h"
+#include "HumbugEngine/Ressources/Mesh.h"
+#include "HumbugEngine/Ressources/Shader.h"
+#include "HumbugEngine/Ressources/Texture.h"
 // #include "HumbugEngine/Player.h"
 
 Object::Object() :

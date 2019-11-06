@@ -1,13 +1,16 @@
 #pragma once
-#include "HumbugEngine/GameHeader.h"
+#include "HumbugEngine/Utils/GameHeader.h"
 #include "HumbugEngine/Objects/Object.h"
-#include "HumbugEngine/FrameBuffer.h"
-#include "HumbugEngine/Mesh.h"
-#include "HumbugEngine/Resources.h"
-#include "HumbugEngine/Shader.h"
+#include "HumbugEngine/Components/FrameBuffer.h"
+#include "HumbugEngine/Components/MeshRenderer.h"
+#include "HumbugEngine/Utils/Resources.h"
+#include "HumbugEngine/Ressources/Shader.h"
 #include <memory>
 
 class Portal : public Object {
+protected:
+  bool allowForComponents() override { return false; }
+
 public:
   //Subclass that represents a warp
   struct Warp {
@@ -41,7 +44,9 @@ public:
   void DebugDraw(const Camera& cam, const Matrix4& mat);
 
 private:
-  std::shared_ptr<Shader> errShader;
-  FrameBuffer frameBuf[GH_MAX_RECURSION <= 1 ? 1 : GH_MAX_RECURSION - 1];
+  std::shared_ptr<Shader> m_errShader, m_shader;
+  FrameBuffer m_frameBuf[GH_MAX_RECURSION <= 1 ? 1 : GH_MAX_RECURSION - 1];
+
+  std::shared_ptr<MeshRenderer> m_portalFrame;
 };
 typedef std::vector<std::shared_ptr<Portal>> PPortalVec;

@@ -1,6 +1,6 @@
 #pragma once
-#include "./MazeRoom.h"
-#include "..\..\..\Portal.h"
+#include "HumbugEngine/Ressources/Objects/MazeRoom/MazeRoom.h"
+#include "HumbugEngine/Objects/Portal.h"
 #include <array>
 #include <time.h>
 

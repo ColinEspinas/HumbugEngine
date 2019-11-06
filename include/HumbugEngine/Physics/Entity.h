@@ -1,5 +1,5 @@
 #pragma once
-#include "HumbugEngine/PhysicRuleset.h"
+#include "HumbugEngine/Physics/PhysicRuleset.h"
 
 class Entity : public Physical
 {

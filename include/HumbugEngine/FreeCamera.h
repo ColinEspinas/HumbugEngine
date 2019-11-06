@@ -1,6 +1,6 @@
 #pragma once
-#include "HumbugEngine/Playable.h"
-#include "HumbugEngine/Vector.h"
+#include "HumbugEngine/Physics/Playable.h"
+#include "HumbugEngine/Utils/Vector.h"
 
 static const float FREECAMERA_SPEED_MULTIPLIER = 2.0f;
 static const float FREECAMERA_VERTICAL_VELOCITY = 1.5f;

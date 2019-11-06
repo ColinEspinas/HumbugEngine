@@ -1,7 +1,7 @@
 #pragma once
-#include "HumbugEngine/Scene.h"
+#include "HumbugEngine/Core/Scene.h"
 
 class Level3 : public Scene {
 public:
-  virtual void Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, Player& player) override;
+  virtual void Load(Player& player) override;
 };

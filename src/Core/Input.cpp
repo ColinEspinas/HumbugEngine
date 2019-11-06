@@ -1,5 +1,5 @@
-#include "HumbugEngine/Input.h"
-#include "HumbugEngine/GameHeader.h"
+#include "HumbugEngine/Core/Input.h"
+#include "HumbugEngine/Utils/GameHeader.h"
 #include <Windows.h>
 #include <memory>
 

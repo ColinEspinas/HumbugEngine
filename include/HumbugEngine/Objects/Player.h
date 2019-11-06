@@ -1,9 +1,9 @@
 #pragma once
-#include "HumbugEngine/Vector.h"
-#include "HumbugEngine/Physical.h"
-#include "HumbugEngine/Playable.h"
+#include "HumbugEngine/Utils/Vector.h"
+#include "HumbugEngine/Physics/Physical.h"
+#include "HumbugEngine/Physics/Playable.h"
 
-#include "PointLight.h"
+#include "HumbugEngine/Components/PointLight.h"
 
 static const float PLAYER_RUNNING_MULTIPLIER = 1.7f;
 

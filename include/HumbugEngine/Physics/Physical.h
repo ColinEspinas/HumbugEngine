@@ -1,7 +1,7 @@
 #pragma once
 #include "HumbugEngine/Objects/Object.h"
-#include "HumbugEngine/Portal.h"
-#include "HumbugEngine/Sphere.h"
+#include "HumbugEngine/Objects/Portal.h"
+#include "HumbugEngine/Ressources/Sphere.h"
 
 class Physical : public Object {
 public:

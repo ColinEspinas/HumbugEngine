@@ -1,6 +1,6 @@
 #include "HumbugEngine/Ressources/Mesh.h"
 
-#include "HumbugEngine/Vector.h"
+#include "HumbugEngine/Utils/Vector.h"
 #include <fstream>
 #include <sstream>
 #include <string>

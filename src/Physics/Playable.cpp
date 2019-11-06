@@ -1,8 +1,8 @@
-#include "HumbugEngine/Playable.h"
-#include "HumbugEngine/Input.h"
-#include "HumbugEngine/GameHeader.h"
-#include "HumbugEngine/Vector.h"
-#include "HumbugEngine/Camera.h"
+#include "HumbugEngine/Physics/Playable.h"
+#include "HumbugEngine/Core/Input.h"
+#include "HumbugEngine/Utils/GameHeader.h"
+#include "HumbugEngine/Utils/Vector.h"
+#include "HumbugEngine/Components/Camera.h"
 
 // Update Function
 void Playable::Update()

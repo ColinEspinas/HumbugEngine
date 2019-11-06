@@ -23,21 +23,21 @@ public:
   virtual ~Tunnel() {}
 
   void SetDoor1(Object& portal) const {
-    portal.pos = LocalToWorld().MulPoint(Vector3(0, 1, 1));
-    portal.euler = euler;
-    portal.scale = Vector3(0.6f, 0.999f, 1) * scale.x;
+    portal.m_pos = LocalToWorld().MulPoint(Vector3(0, 1, 1));
+    portal.m_euler = m_euler;
+    portal.m_scale = Vector3(0.6f, 0.999f, 1) * m_scale.x;
   }
   void SetDoor2(Object& portal) const {
-    portal.euler = euler;
+    portal.m_euler = m_euler;
     if (type == SCALE) {
-      portal.pos = LocalToWorld().MulPoint(Vector3(0, 0.5f, -1));
-      portal.scale = Vector3(0.3f, 0.499f, 0.5f) * scale.x;
+      portal.m_pos = LocalToWorld().MulPoint(Vector3(0, 0.5f, -1));
+      portal.m_scale = Vector3(0.3f, 0.499f, 0.5f) * m_scale.x;
     } else if (type == SLOPE) {
-      portal.pos = LocalToWorld().MulPoint(Vector3(0, -1, -1));
-      portal.scale = Vector3(0.6f, 0.999f, 1) * scale.x;
+      portal.m_pos = LocalToWorld().MulPoint(Vector3(0, -1, -1));
+      portal.m_scale = Vector3(0.6f, 0.999f, 1) * m_scale.x;
     } else {
-      portal.pos = LocalToWorld().MulPoint(Vector3(0, 1, -1));
-      portal.scale = Vector3(0.6f, 0.999f, 1) * scale.x;
+      portal.m_pos = LocalToWorld().MulPoint(Vector3(0, 1, -1));
+      portal.m_scale = Vector3(0.6f, 0.999f, 1) * m_scale.x;
     }
   }
 

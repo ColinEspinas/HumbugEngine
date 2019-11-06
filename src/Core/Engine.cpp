@@ -1,5 +1,5 @@
-#include "HumbugEngine/Engine.h"
-#include "HumbugEngine/Physical.h"
+#include "HumbugEngine/Core/Engine.h"
+#include "HumbugEngine/Physics/Physical.h"
 #include "HumbugEngine/Level1.h"
 #include "HumbugEngine/Level2.h"
 #include "HumbugEngine/Level3.h"
