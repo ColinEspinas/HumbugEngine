@@ -70,12 +70,12 @@ public:
 	Matrix4 WorldToLocal() const;
 	Vector3 Forward() const;
 
+	// Physical scale, only updated by portal scale changes
+   	float p_scale;
+
 //Casts
 	// virtual Physical* AsPhysical() { return nullptr; }
 	// const Physical* AsPhysical() const { return const_cast<Object*>(this)->AsPhysical(); }
-
-// Physical scale, only updated by portal scale changes
-//   float p_scale;
 
 //   std::shared_ptr<Mesh> mesh;
 //   std::shared_ptr<Texture> texture;
@@ -99,8 +99,6 @@ inline std::shared_ptr<Component> Object::GetComponent(std::string name)
 template<class C>
 inline std::shared_ptr<Component> Object::GetComponent()
 {
-	if (!allowForComponents()) return nullptr;
-
 	for (auto component : m_components) {
 		if (std::dynamic_pointer_cast<C>(component)) {
 			return component;
@@ -111,8 +109,6 @@ inline std::shared_ptr<Component> Object::GetComponent()
 
 inline PComponentVec Object::GetComponents(std::string name)
 {
-	if (!allowForComponents()) return PComponentVec(0);
-
 	PComponentVec comps;
 	for (auto component : m_components) {
 		if (component->GetName() == name) {
@@ -125,8 +121,6 @@ inline PComponentVec Object::GetComponents(std::string name)
 template<class C>
 inline PComponentVec Object::GetComponents()
 {
-	if (!allowForComponents()) return PComponentVec(0);
-
 	PComponentVec comps;
 	for (auto component : m_components) {
 		if (std::dynamic_pointer_cast<C>(component)) {
@@ -212,5 +206,23 @@ inline void Object::RemoveComponents()
 		if (std::dynamic_pointer_cast<C>(m_components[ii]))
 			m_components.erase(m_components.begin() + ii);
 		else ii++;
+	}
+}
+
+
+
+// Casts
+namespace ObjectCast
+{
+	template<class C>
+	inline std::shared_ptr<C> Cast(std::shared_ptr<Object> obj)
+	{
+		return std::dynamic_pointer_cast<C>(obj);
+	}
+
+	template<class C>
+	inline bool isFrom(std::shared_ptr<Object> obj)
+	{
+		return (Cast<C>(obj) != nullptr);
 	}
 }

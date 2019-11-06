@@ -12,15 +12,15 @@ MazeCase::MazeCase(int Index, int section, int x, int y)
 	: Section(section), X(x), Y(y), m_room(std::make_shared<MazeRoom_0>())
 {
 	this->set(Index, 0);
-	m_pos = m_room->pos;
+	m_pos = m_room->m_pos;
 }
 
 
 // MazeCase: Return Room
 std::shared_ptr<MazeRoom> MazeCase::get() const
 {
-	m_room->euler.y = float(m_Ry) * GH_PI / 2;
-	m_room->pos = m_pos;
+	m_room->m_euler.y = float(m_Ry) * GH_PI / 2;
+	m_room->m_pos = m_pos;
 	return m_room;
 }
 
@@ -544,8 +544,8 @@ void Maze::Apply(PObjectVec & Objects, PPortalVec & Portals)
 	for (int ii = 0; ii < amountOfSection; ii++)
 	{
 		auto Floor = std::make_shared<Ground>();
-		Floor->scale = Vector3(SectionWidth * 2.5f, 1.0f, SectionHeight * 2.5f);
-		Floor->pos += Vector3((SectionWidth + 1) * ii * 5.0f + (SectionWidth - 1) * 2.5f, 0, (SectionHeight - 1) * 2.5f);
+		Floor->m_scale = Vector3(SectionWidth * 2.5f, 1.0f, SectionHeight * 2.5f);
+		Floor->m_pos += Vector3((SectionWidth + 1) * ii * 5.0f + (SectionWidth - 1) * 2.5f, 0, (SectionHeight - 1) * 2.5f);
 		Objects.push_back(Floor);
 	}
 
@@ -622,9 +622,9 @@ MazePortal::MazePortal(std::shared_ptr<MazeCase> ref, DIRECTION dir, int section
 	case 3: m_LocalOffset = Vector3(2.5f, 2.5f, 0); break;
 	default: break;
 	}
-	m_Content->euler = Vector3(0, float(m_Direction) * GH_PI / 2.0f, 0);
-	m_Content->scale = Vector3(1.25f, 2.5f, 1.25f);
-	m_Content->pos =
+	m_Content->m_euler = Vector3(0, float(m_Direction) * GH_PI / 2.0f, 0);
+	m_Content->m_scale = Vector3(1.25f, 2.5f, 1.25f);
+	m_Content->m_pos =
 		m_LocalOffset // Local Offset Member
 		+ Vector3(5.0f * m_Parent->X, 0, 5.0f * m_Parent->Y) // Case Offset
 		+ Vector3(GetSection() * 5.0f * (sectionWidth + 1), 0, 0); // Section Offset

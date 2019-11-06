@@ -2,7 +2,9 @@
 #include <fstream>
 #include <sstream>
 
-Shader::Shader(const char* name) {
+Shader::Shader(const char* name)
+  : Ressource("Shader", name)
+{
   //Get the file paths
   const std::string vert = "assets/shaders/" + std::string(name) + ".vert";
   const std::string frag = "assets/shaders/" + std::string(name) + ".frag";

@@ -9,8 +9,10 @@ public:
   void Use() override;
 
 private:
-  GLuint texId;
-  bool is3D;
+  GLuint m_texId;
+  bool m_is3D;
+
+  int m_rows, m_cols;
 
   void _Load(std::string _path) override;
 };

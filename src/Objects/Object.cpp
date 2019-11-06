@@ -2,7 +2,7 @@
 #include "HumbugEngine/Ressources/Mesh.h"
 #include "HumbugEngine/Ressources/Shader.h"
 #include "HumbugEngine/Ressources/Texture.h"
-// #include "HumbugEngine/Player.h"
+#include "HumbugEngine/Objects/Player.h"
 
 Object::Object() :
   m_pos(0.0f),

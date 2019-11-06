@@ -125,7 +125,7 @@ int Engine::Run() {
 	  // Update Camera Position
 	  if (curFocus->Cast() == 1)
 	  {
-		  freeCamera->pos = player->pos;
+		  freeCamera->m_pos = player->m_pos;
 	  }
 
 	  // Switches
@@ -189,7 +189,7 @@ void Engine::Update() {
   //Collisions
   //For each physics object
   for (size_t i = 0; i < vObjects.size(); ++i) {
-    Physical* physical = vObjects[i]->AsPhysical();
+    Physical* physical = ObjectCast::Cast<Physical>(vObjects[i]).get();
     if (!physical) { continue; }
     Matrix4 worldToLocal = physical->WorldToLocal();
 

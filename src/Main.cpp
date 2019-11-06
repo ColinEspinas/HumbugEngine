@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "HumbugEngine/Engine.h"
+#include "HumbugEngine/Core/Engine.h"
 
 int APIENTRY WinMain(HINSTANCE hCurrentInst, HINSTANCE hPreviousInst, LPSTR lpszCmdLine, int nCmdShow) {
   //Open console in debug mode
