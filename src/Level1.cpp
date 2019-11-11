@@ -4,10 +4,14 @@
 
 void Level1::Load(Player& player)
 {
-	lights.push_back(player.getTorch());
+	AddObject(player.getTorch());
+
+	AddObject(std::make_shared<LightObject>(false));
+	ObjectCast::Cast<LightObject>(GetObject(GetObjectAmount() - 1))
+		->AddComponent<PointLight>(Vector3(0.0f, 1.0f, 0.0f), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 0.9f, 0.8f), Vector3(1.0f, 0.9f, 0.8f));
 
 	//lights.push_back(std::shared_ptr<PointLight>(new PointLight(Vector3(0.0f, 200.0f, 0.0f), 1.0f, 0.014f, 0.0007f, Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 0.8f, 0.6f))));
-	lights.push_back(std::shared_ptr<PointLight>(new PointLight(Vector3(0.0f, 1.0f, 0.0f), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 0.9f, 0.8f), Vector3(1.0f, 0.9f, 0.8f))));
+	//lights.push_back(std::shared_ptr<PointLight>(new PointLight(Vector3(0.0f, 1.0f, 0.0f), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 0.9f, 0.8f), Vector3(1.0f, 0.9f, 0.8f))));
 	//lights.push_back(std::shared_ptr<DirLight>(new DirLight(Vector3(0.2f, 0.0f, 0.2f))));
 	//lights.push_back(std::shared_ptr<PointLight>(new PointLight(Vector3(-6.80f, 1.0f, -5.48f), 1.0f, 0.09f, 0.032f, Vector3(0.0f, 0.0f, 1.0f), Vector3(0.0f, 0.0f, 1.0f))));
 

@@ -20,3 +20,20 @@ public:
 	virtual void Update() {}
 };
 typedef std::vector<std::shared_ptr<Component>> PComponentVec;
+
+
+// Casts
+namespace ComponentCast
+{
+	template<class C>
+	inline std::shared_ptr<C> Cast(std::shared_ptr<Component> comp)
+	{
+		return std::dynamic_pointer_cast<C>(comp);
+	}
+
+	template<class C>
+	inline bool isFrom(std::shared_ptr<Component> comp)
+	{
+		return (Cast<C>(comp) != nullptr);
+	}
+}

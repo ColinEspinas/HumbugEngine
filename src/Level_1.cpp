@@ -5,10 +5,10 @@
 
 void Level_1::Load(Player & player)
 {
-	lights.push_back(player.getTorch());
+	AddObject(player.getTorch());
 
 	Maze M(3);
-	M.Apply();
+	M.Apply(m_Objects);
 
 
 	/*//

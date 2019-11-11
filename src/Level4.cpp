@@ -3,7 +3,7 @@
 #include "HumbugEngine/Ground.h"
 
 void Level4::Load(Player& player) {
-	lights.push_back(player.getTorch());
+	AddObject(player.getTorch());
 
   std::shared_ptr<Tunnel> tunnel1(new Tunnel(Tunnel::SLOPE));
   tunnel1->m_pos = Vector3(0, 0, 0);

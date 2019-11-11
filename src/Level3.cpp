@@ -5,7 +5,7 @@
 #include "HumbugEngine/PillarRoom.h"
 
 void Level3::Load(Player& player) {
-	lights.push_back(player.getTorch());
+	AddObject(player.getTorch());
 
   //Room 1
   std::shared_ptr<Pillar> pillar1(new Pillar);

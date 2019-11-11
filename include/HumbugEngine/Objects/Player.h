@@ -4,6 +4,7 @@
 #include "HumbugEngine/Physics/Playable.h"
 
 #include "HumbugEngine/Components/PointLight.h"
+#include "HumbugEngine/Objects/LightObject.h"
 
 static const float PLAYER_RUNNING_MULTIPLIER = 1.7f;
 
@@ -24,14 +25,14 @@ public:
 
   virtual int Cast() const override { return 1; }
 
-  std::shared_ptr<PointLight> getTorch() const { return Torch; }
+  std::shared_ptr<LightObject> getTorch() const { return Torch; }
 
 private:
 
   float bob_mag;
   float bob_phi;
 
-  std::shared_ptr<PointLight> Torch;
+  std::shared_ptr<LightObject> Torch;
 
   bool onGround;
 };

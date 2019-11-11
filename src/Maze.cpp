@@ -538,7 +538,7 @@ Maze::Maze(const unsigned int seed, int nS, int W, int H, int nJ)
 
 
 // Maze: Apply and Push each Objects/Portals to Parameters
-void Maze::Apply(PObjectVec & Objects, PPortalVec & Portals)
+void Maze::Apply(PObjectVec & Objects)
 {
 	// Push Grounds
 	for (int ii = 0; ii < amountOfSection; ii++)
@@ -560,7 +560,7 @@ void Maze::Apply(PObjectVec & Objects, PPortalVec & Portals)
 	// Push Portals
 	for (auto P : m_Portals)
 	{
-		Portals.push_back(P);
+		Objects.push_back(P);
 	}
 }
 

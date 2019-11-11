@@ -5,10 +5,8 @@
 #include "HumbugEngine/Core/Lighting.h"
 
 class Scene {
-private:
-  PObjectVec m_Objects;
-
 protected:
+  PObjectVec m_Objects;
   void AddObject(std::shared_ptr<Object> Obj);
   void RemoveObject(std::shared_ptr<Object> Obj);
   std::shared_ptr<Object> GetObject(int index);

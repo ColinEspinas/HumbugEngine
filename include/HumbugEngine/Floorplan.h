@@ -13,7 +13,7 @@ public:
   }
   virtual ~Floorplan() {}
 
-  void AddPortals(PPortalVec& pvec) const {
+  void AddPortals(PObjectVec& ovec) const {
     std::shared_ptr<Portal> p1(new Portal);
     std::shared_ptr<Portal> p2(new Portal);
     std::shared_ptr<Portal> p3(new Portal);
@@ -50,11 +50,11 @@ public:
     Portal::Connect(p4->back, p5->front);
     Portal::Connect(p6->front, p5->back);
 
-    pvec.push_back(p1);
-    pvec.push_back(p2);
-    pvec.push_back(p3);
-    pvec.push_back(p4);
-    pvec.push_back(p5);
-    pvec.push_back(p6);
+    ovec.push_back(p1);
+    ovec.push_back(p2);
+    ovec.push_back(p3);
+    ovec.push_back(p4);
+    ovec.push_back(p5);
+    ovec.push_back(p6);
   }
 };

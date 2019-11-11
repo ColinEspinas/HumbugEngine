@@ -70,7 +70,7 @@ class Maze
 {
 public:
 	Maze(const unsigned int seed = time(NULL), int nSection = 4, int width = 4, int height = 4, int nJonction = 2);
-	void Apply(PObjectVec& Objects, PPortalVec& Portals);
+	void Apply(PObjectVec& Objects);
 
 	const int amountOfSection, SectionWidth, SectionHeight;
 

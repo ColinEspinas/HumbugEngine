@@ -2,7 +2,7 @@
 #include "HumbugEngine/House.h"
 
 void Level2::Load(Player& player) {
-	lights.push_back(player.getTorch());
+	AddObject(player.getTorch());
 
   std::shared_ptr<House> house1(std::make_shared<House>("three_room.bmp"));
   house1->m_pos = Vector3(0, 0, -20);
