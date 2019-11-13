@@ -54,11 +54,9 @@ private:
   Input input;
   Timer timer;
 
-  Lighting lighting = Lighting(vLights);
+  Lighting lighting;
 
   std::vector<std::shared_ptr<Object>> vObjects;
-  std::vector<std::shared_ptr<Portal>> vPortals;
-  std::vector<std::shared_ptr<Light>> vLights;
   std::shared_ptr<Sky> sky;
 
   std::shared_ptr<FreeCamera> freeCamera;

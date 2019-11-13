@@ -7,8 +7,10 @@ void Level1::Load(Player& player)
 	AddObject(player.getTorch());
 
 	AddObject(std::make_shared<LightObject>(false));
-	ObjectCast::Cast<LightObject>(GetObject(GetObjectAmount() - 1))
-		->AddComponent<PointLight>(Vector3(0.0f, 1.0f, 0.0f), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 0.9f, 0.8f), Vector3(1.0f, 0.9f, 0.8f));
+	auto PL = std::make_shared<PointLight>(
+		Vector3(0.0f, 1.0f, 0.0f), 1.0f, 0.09f, 0.032f,
+		Vector3(1.0f, 0.9f, 0.8f), Vector3(1.0f, 0.9f, 0.8f));
+	ObjectCast::Cast<LightObject>(GetObject(GetObjectAmount() - 1))->AddComponent(PL);
 
 	//lights.push_back(std::shared_ptr<PointLight>(new PointLight(Vector3(0.0f, 200.0f, 0.0f), 1.0f, 0.014f, 0.0007f, Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 0.8f, 0.6f))));
 	//lights.push_back(std::shared_ptr<PointLight>(new PointLight(Vector3(0.0f, 1.0f, 0.0f), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 0.9f, 0.8f), Vector3(1.0f, 0.9f, 0.8f))));

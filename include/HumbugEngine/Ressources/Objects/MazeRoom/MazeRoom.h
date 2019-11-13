@@ -1,6 +1,7 @@
 #pragma once
 #include "HumbugEngine/Objects/Object.h"
 #include "HumbugEngine/Utils/Resources.h"
+#include "HumbugEngine/Components/MeshRenderer.h"
 
 // Maze Room Interface
 class MazeRoom : public Object

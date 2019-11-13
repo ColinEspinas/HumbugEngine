@@ -8,7 +8,7 @@ public:
 	Light(std::string _name = "Light") : Component(_name) {};
 	~Light() {};
 
-	int Use() override {}
+	int Use() override { return 0; }
 	virtual void Use(std::shared_ptr<Shader> & objectShader) = 0;
 
 	bool On = true;

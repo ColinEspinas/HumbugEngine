@@ -22,7 +22,7 @@ public:
 	size_t getDirLightsCount();
 
 private:
-	std::vector<std::shared_ptr<Light>> & m_Lights;
+	std::vector<std::shared_ptr<Light>> m_Lights;
 	//std::shared_ptr<Shader> shadowShader = AquireShader("");
 };
 typedef std::vector<std::shared_ptr<Light>> PLightVec;

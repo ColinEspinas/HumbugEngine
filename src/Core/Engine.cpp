@@ -28,7 +28,8 @@ LRESULT WINAPI StaticWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL) {
+Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL)
+{
   GH_ENGINE = this;
   GH_INPUT = &input;
   isFullscreen = false;
@@ -166,8 +167,6 @@ void Engine::LoadScene(int ix) {
   //Clear out old scene
   if (curScene) { curScene->Unload(); }
   vObjects.clear();
-  vPortals.clear();
-  vLights.clear();
   player->Reset();
   freeCamera->Reset();
 
@@ -483,7 +482,6 @@ void Engine::InitGLObjects() {
 void Engine::DestroyGLObjects() {
   curScene->Unload();
   vObjects.clear();
-  vPortals.clear();
 }
 
 void Engine::SetupInputs() {
