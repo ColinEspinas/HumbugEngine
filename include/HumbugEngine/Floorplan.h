@@ -6,9 +6,11 @@
 class Floorplan : public Object {
 public:
   Floorplan() {
-    mesh = AquireMesh("floorplan.obj");
-    shader = AquireShader("texture_array");
-    texture = AquireTexture("floorplan_textures.bmp", 4, 4);
+    std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
+		MR->AddMesh(AquireMesh("floorplan.obj"));
+		MR->GetMesh(0)->shader = AquireShader("texture_array");
+		MR->GetMesh(0)->texture = AquireTexture("floorplan_textures.bmp", 4, 4);
+		AddComponent(MR);
     m_scale = Vector3(0.1524f); //6-inches to meters
   }
   virtual ~Floorplan() {}

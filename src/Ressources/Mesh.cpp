@@ -7,7 +7,7 @@
 #include <cassert>
 
 Mesh::Mesh(std::string _path)
-  : Ressource("Mesh", _path)
+  : Ressource("Mesh", _path), m_is3DTex(false)
 {
   this->_Load(_path);
 }
@@ -22,7 +22,7 @@ void Mesh::_Load(std::string _path) {
   //Temporaries
   std::vector<float> vert_palette;
   std::vector<float> uv_palette;
-  bool is3DTex = false;
+  m_is3DTex = false;
 
   //Materials Related
   std::vector<std::string> material_name_palette;
@@ -52,7 +52,7 @@ void Mesh::_Load(std::string _path) {
       uv_palette.push_back(v);
       if (!ss.fail()) {
         uv_palette.push_back(w);
-        is3DTex = true;
+        m_is3DTex = true;
       }
     } else if (line.find("c ") == 0) {
       uint32_t a = 0, b = 0, c = 0;
@@ -96,7 +96,7 @@ void Mesh::_Load(std::string _path) {
       if (wild) {
         assert(num_slashes == 0);
         const uint32_t v_ix = (uint32_t)vert_palette.size() / 3;
-        const uint32_t t_ix = (uint32_t)uv_palette.size() / (is3DTex ? 3 : 2);
+        const uint32_t t_ix = (uint32_t)uv_palette.size() / (m_is3DTex ? 3 : 2);
         if (wild2) {
           a = v_ix - 3; b = v_ix - 2; c = v_ix - 1; d = v_ix - 0;
           at = t_ix - 3; bt = t_ix - 2; ct = t_ix - 1; dt = t_ix - 0;
@@ -137,9 +137,9 @@ void Mesh::_Load(std::string _path) {
       }
 
       //Add face to list
-      AddFace(vert_palette, uv_palette, a, at, b, bt, c, ct, is3DTex);
+      AddFace(vert_palette, uv_palette, a, at, b, bt, c, ct, m_is3DTex);
       if (isQuad) {
-        AddFace(vert_palette, uv_palette, c, ct, d, dt, a, at, is3DTex);
+        AddFace(vert_palette, uv_palette, c, ct, d, dt, a, at, m_is3DTex);
       }
 	  
 	  // Materials
@@ -213,7 +213,7 @@ void Mesh::Use()
     glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
     glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(uvs[0]), uvs.data(), GL_STATIC_DRAW);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, (is3DTex ? 3 : 2), GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(1, (m_is3DTex ? 3 : 2), GL_FLOAT, GL_FALSE, 0, 0);
   }
   {
     glBindBuffer(GL_ARRAY_BUFFER, vbo[2]);

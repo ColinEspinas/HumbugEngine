@@ -5,9 +5,11 @@
 class House : public Object {
 public:
   House(const char* tex) {
-    mesh = AquireMesh("square_rooms.obj");
-    shader = AquireShader("texture");
-    texture = AquireTexture(tex);
+    std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
+		MR->AddMesh(AquireMesh("square_rooms.obj"));
+		MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture(tex);
+		AddComponent(MR);
     m_scale = Vector3(1.0f, 3.0f, 1.0f);
   }
   virtual ~House() {}

@@ -3,6 +3,8 @@
 #include "HumbugEngine/Ressources/Material.h"
 #include "HumbugEngine/Components/Collider.h"
 #include "HumbugEngine/Components/Camera.h"
+#include "HumbugEngine/Ressources/Texture.h"
+#include "HumbugEngine/Ressources/Shader.h"
 #include <GL/glew.h>
 #include <vector>
 #include <map>
@@ -23,6 +25,9 @@ public:
 
   std::vector<Collider> colliders;
 
+  std::shared_ptr<Texture> texture;
+  std::shared_ptr<Shader> shader;
+
 private:
   void _Load(std::string _path) override;
 
@@ -37,8 +42,10 @@ private:
   std::vector<float> uvs;
   std::vector<float> normals;
 
-  bool isUsingMaterials = false;
-  std::vector<Material> materials;
+  bool m_is3DTex = false;
+
+  bool isUsingMaterials = false;    // TO CHANGE
+  std::vector<Material> materials;  // TO REMOVE
 };
 
 typedef std::vector<std::shared_ptr<Mesh>> PMeshVec;

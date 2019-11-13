@@ -58,6 +58,9 @@ public:
 	// Remove ComponentS
 	void RemoveComponents(std::string name);
 	template<class C = Component> void RemoveComponents();
+	// Verification of Component
+	template<class C = Component> bool Contain();
+	bool Contain(std::string _name);
 
 
 	// Debug:
@@ -208,6 +211,18 @@ inline void Object::RemoveComponents()
 		else ii++;
 	}
 }
+
+template<class C>
+inline bool Object::Contain()
+{
+	return (GetComponent<C>() != nullptr);
+}
+
+inline bool Object::Contain(std::string _name)
+{
+	return (GetComponent(_name) != nullptr);
+}
+
 
 
 

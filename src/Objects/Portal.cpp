@@ -45,7 +45,7 @@ void Portal::Draw(const Camera& cam, GLuint curFBO) {
   //Now we can render the portal texture to the screen
   const Matrix4 mv = LocalToWorld();
   const Matrix4 mvp = cam.Matrix() * mv;
-  shader->Use();
+  m_shader->Use();
   m_frameBuf[GH_REC_LEVEL - 1].Use();
   m_shader->SetMVP(mvp.m, mv.m);
   m_portalFrame->Draw();

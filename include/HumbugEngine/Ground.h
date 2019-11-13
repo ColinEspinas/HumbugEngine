@@ -5,13 +5,15 @@
 class Ground : public Object {
 public:
   Ground(bool slope=false) {
+    std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
     if (slope) {
-      mesh = AquireMesh("ground_slope.obj");
+      MR->AddMesh(AquireMesh("ground_slope.obj"));
     } else {
-      mesh = AquireMesh("ground.obj");
+      MR->AddMesh(AquireMesh("ground.obj"));
     }
-    shader = AquireShader("texture");
-    texture = AquireTexture("checker_green.bmp");
+		MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture("checker_green.bmp");
+		AddComponent(MR);
     m_scale = Vector3(10, 1, 10);
   }
   virtual ~Ground() {}

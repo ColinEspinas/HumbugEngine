@@ -5,9 +5,11 @@
 class PillarRoom : public Object {
 public:
   PillarRoom() {
-    mesh = AquireMesh("pillar_room.obj");
-    shader = AquireShader("texture");
-    texture = AquireTexture("three_room.bmp");
+    std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
+		MR->AddMesh(AquireMesh("pillar_room.obj"));
+		MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture("three_room.bmp");
+		AddComponent(MR);
     m_scale = Vector3(1.1f);
   }
 

@@ -17,4 +17,6 @@ public:
   
   virtual void Load(Player& player)=0;
   virtual void Unload() {}
+
+  inline void Apply(PObjectVec & _content) { _content = m_Objects; }
 };

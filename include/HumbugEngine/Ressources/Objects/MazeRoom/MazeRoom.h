@@ -15,9 +15,11 @@ class MazeRoom_0 : public MazeRoom
 public:
 	MazeRoom_0()
 	{
-		mesh = AquireMesh("MazeRoom/Maze000.obj");
-		shader = AquireShader("texture");
-		texture = AquireTexture("Bush.bmp");
+		std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
+		MR->AddMesh(AquireMesh("MazeRoom/Maze000.obj"));
+		MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture("Bush.bmp");
+		AddComponent(MR);
 		m_scale = Vector3(2.5f);
 		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
@@ -31,9 +33,11 @@ class MazeRoom_1 : public MazeRoom
 public:
 	MazeRoom_1()
 	{
-		mesh = AquireMesh("MazeRoom/Maze001.obj");
-		shader = AquireShader("texture");
-		texture = AquireTexture("Bush.bmp");
+		std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
+		MR->AddMesh(AquireMesh("MazeRoom/Maze001.obj"));
+		MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture("Bush.bmp");
+		AddComponent(MR);
 		m_scale = Vector3(2.5f);
 		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
@@ -47,9 +51,11 @@ class MazeRoom_2 : public MazeRoom
 public:
 	MazeRoom_2()
 	{
-		mesh = AquireMesh("MazeRoom/Maze002.obj");
-		shader = AquireShader("texture");
-		texture = AquireTexture("Bush.bmp");
+		std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
+		MR->AddMesh(AquireMesh("MazeRoom/Maze002.obj"));
+		MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture("Bush.bmp");
+		AddComponent(MR);
 		m_scale = Vector3(2.5f);
 		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
@@ -63,9 +69,11 @@ class MazeRoom_3 : public MazeRoom
 public:
 	MazeRoom_3()
 	{
-		mesh = AquireMesh("MazeRoom/Maze003.obj");
-		shader = AquireShader("texture");
-		texture = AquireTexture("Bush.bmp");
+		std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
+		MR->AddMesh(AquireMesh("MazeRoom/Maze003.obj"));
+		MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture("Bush.bmp");
+		AddComponent(MR);
 		m_scale = Vector3(2.5f);
 		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
@@ -79,9 +87,11 @@ class MazeRoom_4 : public MazeRoom
 public:
 	MazeRoom_4()
 	{
-		mesh = AquireMesh("MazeRoom/Maze004.obj");
-		shader = AquireShader("texture");
-		texture = AquireTexture("Bush.bmp");
+		std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
+		MR->AddMesh(AquireMesh("MazeRoom/Maze004.obj"));
+		MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture("Bush.bmp");
+		AddComponent(MR);
 		m_scale = Vector3(2.5f);
 		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}
@@ -95,9 +105,11 @@ class MazeRoom_5 : public MazeRoom
 public:
 	MazeRoom_5()
 	{
-		mesh = AquireMesh("MazeRoom/Maze005.obj");
-		shader = AquireShader("texture");
-		texture = AquireTexture("Bush.bmp");
+		std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
+		MR->AddMesh(AquireMesh("MazeRoom/Maze005.obj"));
+		MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture("Bush.bmp");
+		AddComponent(MR);
 		m_scale = Vector3(2.5f);
 		m_euler += Vector3(3 * GH_PI / 2, 0, 0);
 	}

@@ -7,8 +7,9 @@
 Object::Object() :
   m_pos(0.0f),
   m_euler(0.0f),
-  m_scale(1.0f)
-  /*p_scale(1.0f)*/ {
+  m_scale(1.0f),
+  p_scale(1.0f)
+{
 	// if (!material) material = std::make_shared<Material>("__Default");
 }
 
@@ -16,24 +17,27 @@ void Object::Reset() {
   m_pos.SetZero();
   m_euler.SetZero();
   m_scale.SetOnes();
-  //p_scale = 1.0f;
+  p_scale = 1.0f;
 }
 
 void Object::Draw(const Camera& cam, uint32_t curFBO) {
-  if (shader && mesh) {
-	const Matrix4 m = LocalToWorld();
-	const Matrix4 mv = WorldToLocal().Transposed();
-	const Matrix4 mvp = cam.Matrix() * LocalToWorld();
-	shader->Use();
-	if (texture) {
-	  texture->Use();
-	}
-	material->Use(shader);
-	shader->SetM(m.m);
-	shader->SetCam(GH_PLAYER->CamToWorld());
-	shader->SetMVP(mvp.m, mv.m);
-	mesh->Draw();
-  }
+  for (auto C : m_components)
+    if (ComponentCast::isFrom<MeshRenderer>(C))
+      ComponentCast::Cast<MeshRenderer>(C)->Draw(cam, LocalToWorld(), WorldToLocal().Transposed(), cam.Matrix() * LocalToWorld());
+  // if (shader && mesh) {
+	// const Matrix4 m = LocalToWorld();
+	// const Matrix4 mv = WorldToLocal().Transposed();
+	// const Matrix4 mvp = cam.Matrix() * LocalToWorld();
+	// shader->Use();
+	// if (texture) {
+	//   texture->Use();
+	// }
+	// material->Use(shader);
+	// shader->SetM(m.m);
+	// shader->SetCam(GH_PLAYER->CamToWorld());
+	// shader->SetMVP(mvp.m, mv.m);
+	// mesh->Draw();
+  // }
 }
 
 Vector3 Object::Forward() const {
@@ -49,7 +53,7 @@ Matrix4 Object::WorldToLocal() const {
 }
 
 void Object::DebugDraw(const Camera& cam) {
-  if (mesh) {
-    mesh->DebugDraw(cam, LocalToWorld());
-  }
+  if (this->Contain<MeshRenderer>())
+    for (auto Mesh : ComponentCast::Cast<MeshRenderer>(GetComponent<MeshRenderer>())->GetAllMesh())
+      Mesh->DebugDraw(cam, LocalToWorld());
 }

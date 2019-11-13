@@ -47,6 +47,6 @@ private:
   std::shared_ptr<Shader> m_errShader, m_shader;
   FrameBuffer m_frameBuf[GH_MAX_RECURSION <= 1 ? 1 : GH_MAX_RECURSION - 1];
 
-  std::shared_ptr<MeshRenderer> m_portalFrame;
+  std::shared_ptr<Mesh> m_portalFrame;
 };
 typedef std::vector<std::shared_ptr<Portal>> PPortalVec;

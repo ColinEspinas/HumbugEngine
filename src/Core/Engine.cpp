@@ -45,17 +45,17 @@ Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL) {
   GH_PLAYER = player.get();
   freeCamera = std::make_shared<FreeCamera>();
 
-  vScenes.push_back(std::shared_ptr<Scene>(new Level_1));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level2(3)));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level2(6)));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level3));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level4));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level5));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level6));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level_1>()));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level2>(3)));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level2>(6)));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level3>()));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level4>()));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level5>()));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level6>()));
 
   LoadScene(0);
 
-  sky.reset(new Sky);
+  sky.reset(std::make_shared<Sky>().get());
 }
 
 Engine::~Engine() {
@@ -173,7 +173,8 @@ void Engine::LoadScene(int ix) {
 
   //Create new scene
   curScene = vScenes[ix];
-  curScene->Load(vObjects, vLights, vPortals, *player);
+  curScene->Load(*player);
+  curScene->Apply(vObjects);
   vObjects.push_back(player);
   vObjects.push_back(freeCamera);
   curFocus = player;
@@ -521,7 +522,7 @@ void Engine::ConfineCursor() {
 float Engine::NearestPortalDist() const {
   float dist = FLT_MAX;
   for (size_t i = 0; i < vPortals.size(); ++i) {
-    dist = GH_MIN(dist, vPortals[i]->DistTo(player->pos));
+    dist = GH_MIN(dist, vPortals[i]->DistTo(player->m_pos));
   }
   return dist;
 }

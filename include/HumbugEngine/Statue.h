@@ -5,9 +5,11 @@
 class Statue : public Object {
 public:
   Statue(const char* model) {
-    mesh = AquireMesh(model);
-    shader = AquireShader("texture");
-    texture = AquireTexture("gold.bmp");
+    std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
+		MR->AddMesh(AquireMesh(model));
+		MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture("gold.bmp");
+		AddComponent(MR);
   }
   virtual ~Statue() {}
 };

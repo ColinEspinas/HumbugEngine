@@ -10,15 +10,17 @@ public:
   };
 
   Tunnel(Type type) : type(type) {
+    std::shared_ptr<MeshRenderer> MR = std::make_shared<MeshRenderer>();
     if (type == SCALE) {
-      mesh = AquireMesh("tunnel_scale.obj");
+      MR->AddMesh(AquireMesh("tunnel_scale.obj"));
     } else if (type == SLOPE) {
-      mesh = AquireMesh("tunnel_slope.obj");
+      MR->AddMesh(AquireMesh("tunnel_slope.obj"));
     } else {
-      mesh = AquireMesh("tunnel.obj");
+      MR->AddMesh(AquireMesh("tunnel.obj"));
     }
-    shader = AquireShader("texture");
-    texture = AquireTexture("checker_gray.bmp");
+    MR->GetMesh(0)->shader = AquireShader("texture");
+		MR->GetMesh(0)->texture = AquireTexture("checker_gray.bmp");
+		AddComponent(MR);
   }
   virtual ~Tunnel() {}
 
