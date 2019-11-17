@@ -10,10 +10,10 @@
 class Lighting
 {
 public:
-	Lighting(std::vector<std::shared_ptr<Light>> & vLights);
+	Lighting(PObjectVec & vLights);
 	~Lighting();
 
-	void RenderAllLights(std::vector<std::shared_ptr<Object>> vObjects);
+	void RenderAllLights(PObjectVec vObjects);
 	void RenderLights(std::shared_ptr<Object> Object);
 	void RenderDepthMap();
 
@@ -22,7 +22,7 @@ public:
 	size_t getDirLightsCount();
 
 private:
-	std::vector<std::shared_ptr<Light>> m_Lights;
+	PObjectVec m_LightsContainer;
 	//std::shared_ptr<Shader> shadowShader = AquireShader("");
 };
 typedef std::vector<std::shared_ptr<Light>> PLightVec;

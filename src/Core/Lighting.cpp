@@ -2,8 +2,8 @@
 #include "HumbugEngine/Components/MeshRenderer.h"
 
 
-Lighting::Lighting(std::vector<std::shared_ptr<Light>> & vLights)
-	: m_Lights(vLights)
+Lighting::Lighting(PObjectVec & vLights)
+	: m_LightsContainer(vLights)
 {
 }
 
@@ -21,9 +21,10 @@ void Lighting::RenderAllLights(std::vector<std::shared_ptr<Object>> vObjects)
 void Lighting::RenderLights(std::shared_ptr<Object> Object)
 {
 	if (Object->Contain<MeshRenderer>())
-		for (auto light : m_Lights)
-			for (auto Mesh : ComponentCast::Cast<MeshRenderer>(Object->GetComponent<MeshRenderer>())->GetAllMesh())
-				light->Use(Mesh->shader);
+		for (auto container : m_LightsContainer)
+			for (auto light : container->GetComponents<Light>())
+				for (auto Mesh : ComponentCast::Cast<MeshRenderer>(Object->GetComponent<MeshRenderer>())->GetAllMesh())
+					ObjectCast::Cast<Light>(light)->Use(Mesh->shader);
 }
 
 void Lighting::RenderDepthMap()
