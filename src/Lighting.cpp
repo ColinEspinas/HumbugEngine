@@ -24,7 +24,7 @@ void Lighting::RenderLights(std::shared_ptr<Object> Object)
 		for (auto container : m_LightsContainer)
 			for (auto light : container->GetComponents<Light>())
 				for (auto Mesh : ComponentCast::Cast<MeshRenderer>(Object->GetComponent<MeshRenderer>())->GetAllMesh())
-					ObjectCast::Cast<Light>(light)->Use(Mesh->shader);
+					ComponentCast::Cast<Light>(light)->Use(Mesh->shader);
 }
 
 void Lighting::RenderDepthMap()
@@ -51,11 +51,20 @@ void Lighting::RenderDepthMap()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+size_t Lighting::getLightsCount()
+{
+	unsigned int count = 0;
+	for (auto container : m_LightsContainer) {
+		count += container->GetComponents<Light>().size();
+	}
+	return count;
+}
+
 size_t Lighting::getPointLightsCount()
 {
 	unsigned int count = 0;
-	for (auto light : m_Lights) {
-		if (std::static_pointer_cast<PointLight>(light)) count++;
+	for (auto container : m_LightsContainer) {
+		count += container->GetComponents<PointLight>().size();
 	}
 	return count;
 }
@@ -63,8 +72,8 @@ size_t Lighting::getPointLightsCount()
 size_t Lighting::getDirLightsCount()
 {
 	unsigned int count = 0;
-	for (auto light : m_Lights) {
-		if (std::static_pointer_cast<DirLight>(light)) count++;
+	for (auto container : m_LightsContainer) {
+		count += container->GetComponents<DirLight>().size();
 	}
 	return count;
 }

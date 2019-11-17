@@ -28,5 +28,5 @@ public:
 	float near;
 	float far;
 
-	int Use() override {}
+	int Use() override { return 0; }
 };

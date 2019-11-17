@@ -5,8 +5,10 @@
 #include <iostream>
 
 Player::Player() {
-  Torch = std::make_shared<LightObject>(false);
-	Torch->AddComponent<PointLight>(m_pos + Vector3(0, GH_PLAYER_HEIGHT / 2, 0), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 0.8f, 0.8f));
+	Torch = std::make_shared<LightObject>(false);
+	Torch->AddComponent(std::make_shared<PointLight>
+		(m_pos + Vector3(0, GH_PLAYER_HEIGHT / 2, 0), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 0.8f, 0.8f)));
+	//Torch->AddComponent<PointLight>(m_pos + Vector3(0, GH_PLAYER_HEIGHT / 2, 0), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 0.8f, 0.8f));
 	Reset();
 	hitSpheres.push_back(Sphere(Vector3(0, 0, 0), GH_PLAYER_RADIUS));
 	hitSpheres.push_back(Sphere(Vector3(0, GH_PLAYER_RADIUS - GH_PLAYER_HEIGHT, 0), GH_PLAYER_RADIUS));

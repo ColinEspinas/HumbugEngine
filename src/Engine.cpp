@@ -28,7 +28,8 @@ LRESULT WINAPI StaticWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL)
+Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL),
+  lighting(vObjects)
 {
   GH_ENGINE = this;
   GH_INPUT = &input;
@@ -235,9 +236,11 @@ void Engine::Update() {
   for (size_t i = 0; i < vObjects.size(); ++i) {
     Physical* physical = ObjectCast::Cast<Physical>(vObjects[i]).get();
     if (physical) {
-      for (size_t j = 0; j < vPortals.size(); ++j) {
-        if (physical->TryPortal(*vPortals[j])) {
-          break;
+      for (size_t j = 0; j < vObjects.size(); ++j) {
+        if (ObjectCast::isFrom<Portal>(vObjects[j])) {
+          if (physical->TryPortal(*ObjectCast::Cast<Portal>(vObjects[j]))) {
+            break;
+          }
         }
       }
     }
@@ -256,9 +259,13 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
   //Create queries (if applicable)
   GLuint queries[GH_MAX_PORTALS];
   GLuint drawTest[GH_MAX_PORTALS];
-  assert(vPortals.size() <= GH_MAX_PORTALS);
+  int nbPortals = 0;
+  for (int ii = 0; ii < vObjects.size(); ii++)
+    if (ObjectCast::isFrom<Portal>(vObjects[ii]))
+      nbPortals++;
+  assert(nbPortals <= GH_MAX_PORTALS);
   if (occlusionCullingSupported) {
-    glGenQueriesARB((GLsizei)vPortals.size(), queries);
+    glGenQueriesARB((GLsizei)nbPortals, queries);
   }
 
   //Draw scene
@@ -274,28 +281,34 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
     if (occlusionCullingSupported && GH_REC_LEVEL > 0) {
       glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
       glDepthMask(GL_FALSE);
-      for (size_t i = 0; i < vPortals.size(); ++i) {
-        if (vPortals[i].get() != skipPortal) {
-          glBeginQueryARB(GL_SAMPLES_PASSED_ARB, queries[i]);
-          vPortals[i]->DrawPink(cam);
-          glEndQueryARB(GL_SAMPLES_PASSED_ARB);
+      for (size_t i = 0; i < vObjects.size(); ++i) {
+        if (ObjectCast::isFrom<Portal>(vObjects[i])) {
+          if (ObjectCast::Cast<Portal>(vObjects[i]).get() != skipPortal) {
+            glBeginQueryARB(GL_SAMPLES_PASSED_ARB, queries[i]);
+            ObjectCast::Cast<Portal>(vObjects[i])->DrawPink(cam);
+            glEndQueryARB(GL_SAMPLES_PASSED_ARB);
+          }
         }
       }
-      for (size_t i = 0; i < vPortals.size(); ++i) {
-        if (vPortals[i].get() != skipPortal) {
-          glGetQueryObjectuivARB(queries[i], GL_QUERY_RESULT_ARB, &drawTest[i]);
+      for (size_t i = 0; i < vObjects.size(); ++i) {
+        if (ObjectCast::isFrom<Portal>(vObjects[i])) {
+          if (ObjectCast::Cast<Portal>(vObjects[i]).get() != skipPortal) {
+            glGetQueryObjectuivARB(queries[i], GL_QUERY_RESULT_ARB, &drawTest[i]);
+          }
         }
       };
       glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
       glDepthMask(GL_TRUE);
-      glDeleteQueriesARB((GLsizei)vPortals.size(), queries);
+      glDeleteQueriesARB((GLsizei)nbPortals, queries);
     }
-    for (size_t i = 0; i < vPortals.size(); ++i) {
-      if (vPortals[i].get() != skipPortal) {
-        if (occlusionCullingSupported && (GH_REC_LEVEL > 0) && (drawTest[i] == 0)) {
-          continue;
-        } else {
-          vPortals[i]->Draw(cam, curFBO);
+    for (size_t i = 0; i < vObjects.size(); ++i) {
+      if (ObjectCast::isFrom<Portal>(vObjects[i])) {
+        if (ObjectCast::Cast<Portal>(vObjects[i]).get() != skipPortal) {
+          if (occlusionCullingSupported && (GH_REC_LEVEL > 0) && (drawTest[i] == 0)) {
+            continue;
+          } else {
+            ObjectCast::Cast<Portal>(vObjects[i])->Draw(cam, curFBO);
+          }
         }
       }
     }
@@ -523,8 +536,10 @@ void Engine::ConfineCursor() {
 
 float Engine::NearestPortalDist() const {
   float dist = FLT_MAX;
-  for (size_t i = 0; i < vPortals.size(); ++i) {
-    dist = GH_MIN(dist, vPortals[i]->DistTo(player->m_pos));
+  for (size_t i = 0; i < vObjects.size(); ++i) {
+    if (ObjectCast::isFrom<Portal>(vObjects[i])) {
+      dist = GH_MIN(dist, ObjectCast::Cast<Portal>(vObjects[i])->DistTo(player->m_pos));
+    }
   }
   return dist;
 }

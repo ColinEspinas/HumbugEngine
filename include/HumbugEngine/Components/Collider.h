@@ -11,7 +11,7 @@ public:
 
   void DebugDraw(const Camera& cam, const Matrix4& objMat);
 
-  int Use() override {}
+  int Use() override { return 0; }
 
 private:
   void CreateSorted(const Vector3& da, const Vector3& c, const Vector3& db);

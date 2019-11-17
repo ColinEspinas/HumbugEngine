@@ -167,9 +167,9 @@ inline void Object::RemoveComponent()
 {
 	if (!allowForComponents()) return;
 
-	for (auto component : m_components) {
-		if (std::dynamic_pointer_cast<C>(component)) {
-			m_components.erase(component);
+	for (int ii = 0; ii < m_components.size(); ii++) {
+		if (std::dynamic_pointer_cast<C>(m_components[ii])) {
+			m_components.erase(m_components.begin() + ii);
 			return;
 		}
 	}

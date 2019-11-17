@@ -13,6 +13,9 @@ Shader::Shader(const char* name)
   vertId = LoadShader(vert.c_str(), GL_VERTEX_SHADER);
   fragId = LoadShader(frag.c_str(), GL_FRAGMENT_SHADER);
 
+  /// DEBUG
+  // std::cout << vertId << " | " << fragId << std::endl;
+
   //Create the program
   progId = glCreateProgram();
   glAttachShader(progId, vertId);

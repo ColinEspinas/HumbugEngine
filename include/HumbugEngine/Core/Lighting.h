@@ -17,7 +17,7 @@ public:
 	void RenderLights(std::shared_ptr<Object> Object);
 	void RenderDepthMap();
 
-	size_t getLightsCount() { return m_Lights.size(); };
+	size_t getLightsCount();
 	size_t getPointLightsCount();
 	size_t getDirLightsCount();
 

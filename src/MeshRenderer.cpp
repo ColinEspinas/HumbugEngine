@@ -219,7 +219,7 @@ std::vector<std::shared_ptr<Material>> MeshRenderer::GetAllMaterial()
 std::shared_ptr<Material> MeshRenderer::GetMaterial(int _index)
 {
     if (_index < 0 || _index >= m_materials.size())
-        return;
+        return nullptr;
     return m_materials[_index].first;
 }
 
