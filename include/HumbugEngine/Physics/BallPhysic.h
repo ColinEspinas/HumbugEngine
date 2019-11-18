@@ -1,5 +1,5 @@
 #pragma once
-#include "..\Entity.h"
+#include "HumbugEngine/Entity.h"
 
 class BallPhysic : public PhysicRuleset
 {

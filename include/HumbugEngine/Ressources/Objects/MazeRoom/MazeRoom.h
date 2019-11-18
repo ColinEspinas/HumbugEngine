@@ -1,6 +1,6 @@
 #pragma once
-#include "..\..\..\Object.h"
-#include "..\..\..\Resources.h"
+#include "HumbugEngine/Object.h"
+#include "HumbugEngine/Resources.h"
 
 // Maze Room Interface
 class MazeRoom : public Object
