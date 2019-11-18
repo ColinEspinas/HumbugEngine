@@ -45,13 +45,13 @@ Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL) {
   GH_PLAYER = player.get();
   freeCamera = std::make_shared<FreeCamera>();
 
-  vScenes.push_back(std::shared_ptr<Scene>(new Level_1));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level2(3)));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level2(6)));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level3));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level4));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level5));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level6));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level_1>()));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level2>(3)));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level2>(6)));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level3>()));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level4>()));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level5>()));
+  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level6>()));
 
   LoadScene(0);
 
