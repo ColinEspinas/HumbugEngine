@@ -3,12 +3,12 @@
 #include "HumbugEngine\Ressources\Objects\TestObj.h"
 #include "HumbugEngine\Ressources\Objects\MazeRoom\Maze.h"
 
-void Level_1::Load(Player & player)
+void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, Player & player)
 {
-	AddObject(player.getTorch());
+	lights.push_back(player.getTorch());
 
 	Maze M(3);
-	M.Apply(m_Objects);
+	M.Apply(objs, portals);
 
 
 	/*//

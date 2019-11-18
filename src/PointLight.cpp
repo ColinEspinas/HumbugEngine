@@ -1,10 +1,10 @@
-#include "HumbugEngine/Components/PointLight.h"
+#include "HumbugEngine/PointLight.h"
 #include <string>
 
 unsigned int PointLight::m_Count = 0;
 
 PointLight::PointLight(Vector3 Position, float Constant, float Linear, float Quadratic, Vector3 Ambient, Vector3 Diffuse, Vector3 Specular)
-	: m_Constant(Constant), m_Linear(Linear), m_Quadratic(Quadratic), Light("PointLight")
+	: m_Constant(Constant), m_Linear(Linear), m_Quadratic(Quadratic)
 {
 	m_Position = Position;
 	m_Ambient = Ambient;

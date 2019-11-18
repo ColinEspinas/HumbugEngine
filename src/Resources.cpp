@@ -1,4 +1,4 @@
-#include "HumbugEngine/Utils/Resources.h"
+#include "HumbugEngine/Resources.h"
 #include <unordered_map>
 
 std::shared_ptr<Mesh> AquireMesh(const char* name) {
@@ -17,10 +17,11 @@ std::shared_ptr<Shader> AquireShader(const char* name) {
   static std::unordered_map<std::string, std::weak_ptr<Shader>> map;
   std::weak_ptr<Shader>& shader = map[std::string(name)];
   if (shader.expired()) {
-	  std::shared_ptr<Shader> newShader(std::make_shared<Shader>(name));
-	  return newShader;
+    std::shared_ptr<Shader> newShader(std::make_shared<Shader>(name));
+    shader = newShader;
+    return newShader;
   } else {
-	  return shader.lock();
+    return shader.lock();
   }
 }
 

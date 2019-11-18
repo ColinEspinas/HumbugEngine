@@ -1,5 +1,5 @@
-#include "HumbugEngine/Core/Engine.h"
-#include "HumbugEngine/Physics/Physical.h"
+#include "HumbugEngine/Engine.h"
+#include "HumbugEngine/Physical.h"
 #include "HumbugEngine/Level1.h"
 #include "HumbugEngine/Level2.h"
 #include "HumbugEngine/Level3.h"
@@ -28,9 +28,7 @@ LRESULT WINAPI StaticWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL),
-  lighting(vObjects)
-{
+Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL) {
   GH_ENGINE = this;
   GH_INPUT = &input;
   isFullscreen = false;
@@ -47,25 +45,17 @@ Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL),
   GH_PLAYER = player.get();
   freeCamera = std::make_shared<FreeCamera>();
 
-  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level_1>()));
-  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level2>(3)));
-  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level2>(6)));
-  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level3>()));
-  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level4>()));
-  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level5>()));
-  vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level6>()));
+  vScenes.push_back(std::shared_ptr<Scene>(new Level_1));
+  vScenes.push_back(std::shared_ptr<Scene>(new Level2(3)));
+  vScenes.push_back(std::shared_ptr<Scene>(new Level2(6)));
+  vScenes.push_back(std::shared_ptr<Scene>(new Level3));
+  vScenes.push_back(std::shared_ptr<Scene>(new Level4));
+  vScenes.push_back(std::shared_ptr<Scene>(new Level5));
+  vScenes.push_back(std::shared_ptr<Scene>(new Level6));
 
-  //vScenes.push_back(std::shared_ptr<Scene>(new Level_1));
-  //vScenes.push_back(std::shared_ptr<Scene>(new Level2(3)));
-  //vScenes.push_back(std::shared_ptr<Scene>(new Level2(6)));
-  //vScenes.push_back(std::shared_ptr<Scene>(new Level3()));
-  //vScenes.push_back(std::shared_ptr<Scene>(new Level4));
-  //vScenes.push_back(std::shared_ptr<Scene>(new Level5));
-  //vScenes.push_back(std::shared_ptr<Scene>(new Level6));
+  LoadScene(0);
 
-  LoadScene(1); // CHANGED
-
-  sky.reset(std::make_shared<Sky>().get());
+  sky.reset(new Sky);
 }
 
 Engine::~Engine() {
@@ -135,7 +125,7 @@ int Engine::Run() {
 	  // Update Camera Position
 	  if (curFocus->Cast() == 1)
 	  {
-		  freeCamera->m_pos = player->m_pos;
+		  freeCamera->pos = player->pos;
 	  }
 
 	  // Switches
@@ -176,13 +166,14 @@ void Engine::LoadScene(int ix) {
   //Clear out old scene
   if (curScene) { curScene->Unload(); }
   vObjects.clear();
+  vPortals.clear();
+  vLights.clear();
   player->Reset();
   freeCamera->Reset();
 
   //Create new scene
   curScene = vScenes[ix];
-  curScene->Load(*player);
-  curScene->Apply(vObjects);
+  curScene->Load(vObjects, vLights, vPortals, *player);
   vObjects.push_back(player);
   vObjects.push_back(freeCamera);
   curFocus = player;
@@ -190,17 +181,15 @@ void Engine::LoadScene(int ix) {
 
 void Engine::Update() {
   //Update
-	for (int ii = 0; ii < vObjects.size(); ii++) std::cout << (vObjects[ii] != nullptr) << " "; //DEBUG
   for (size_t i = 0; i < vObjects.size(); ++i) {
-	  if (vObjects[i].get() == nullptr) continue; // CHANGED
-    //assert(vObjects[i].get());
+    assert(vObjects[i].get());
     vObjects[i]->Update();
   }
 
   //Collisions
   //For each physics object
   for (size_t i = 0; i < vObjects.size(); ++i) {
-    Physical* physical = ObjectCast::Cast<Physical>(vObjects[i]).get();
+    Physical* physical = vObjects[i]->AsPhysical();
     if (!physical) { continue; }
     Matrix4 worldToLocal = physical->WorldToLocal();
 
@@ -208,34 +197,30 @@ void Engine::Update() {
     for (size_t j = 0; j < vObjects.size(); ++j) {
       if (i == j) { continue; }
       Object& obj = *vObjects[j];
-      for (auto MR : obj.GetComponents<MeshRenderer>())
-      {
-        for (auto Mesh : ComponentCast::Cast<MeshRenderer>(MR)->GetAllMesh())
-        {
-          //For each hit sphere
-          for (size_t s = 0; s < physical->hitSpheres.size(); ++s) {
-            //Brings point from collider's local coordinates to hits's local coordinates.
-            const Sphere& sphere = physical->hitSpheres[s];
-            Matrix4 worldToUnit = sphere.LocalToUnit() * worldToLocal;
-            Matrix4 localToUnit = worldToUnit * obj.LocalToWorld();
-            Matrix4 unitToWorld = worldToUnit.Inverse();
+      if (!obj.mesh) { continue; }
 
-            //For each collider
-            for (size_t c = 0; c < Mesh->colliders.size(); ++c) {
-              Vector3 push;
-              const Collider& collider = Mesh->colliders[c];
-              if (collider.Collide(localToUnit, push)) {
-                //If push is too small, just ignore
-                push = unitToWorld.MulDirection(push);
-                vObjects[j]->OnHit(*physical, push);
-                physical->OnCollide(*vObjects[j], push);
+      //For each hit sphere
+      for (size_t s = 0; s < physical->hitSpheres.size(); ++s) {
+        //Brings point from collider's local coordinates to hits's local coordinates.
+        const Sphere& sphere = physical->hitSpheres[s];
+        Matrix4 worldToUnit = sphere.LocalToUnit() * worldToLocal;
+        Matrix4 localToUnit = worldToUnit * obj.LocalToWorld();
+        Matrix4 unitToWorld = worldToUnit.Inverse();
 
-                worldToLocal = physical->WorldToLocal();
-                worldToUnit = sphere.LocalToUnit() * worldToLocal;
-                localToUnit = worldToUnit * obj.LocalToWorld();
-                unitToWorld = worldToUnit.Inverse();
-              }
-            }
+        //For each collider
+        for (size_t c = 0; c < obj.mesh->colliders.size(); ++c) {
+          Vector3 push;
+          const Collider& collider = obj.mesh->colliders[c];
+          if (collider.Collide(localToUnit, push)) {
+            //If push is too small, just ignore
+            push = unitToWorld.MulDirection(push);
+            vObjects[j]->OnHit(*physical, push);
+            physical->OnCollide(*vObjects[j], push);
+
+            worldToLocal = physical->WorldToLocal();
+            worldToUnit = sphere.LocalToUnit() * worldToLocal;
+            localToUnit = worldToUnit * obj.LocalToWorld();
+            unitToWorld = worldToUnit.Inverse();
           }
         }
       }
@@ -244,13 +229,11 @@ void Engine::Update() {
 
   //Portals
   for (size_t i = 0; i < vObjects.size(); ++i) {
-    Physical* physical = ObjectCast::Cast<Physical>(vObjects[i]).get();
+    Physical* physical = vObjects[i]->AsPhysical();
     if (physical) {
-      for (size_t j = 0; j < vObjects.size(); ++j) {
-        if (ObjectCast::isFrom<Portal>(vObjects[j])) {
-          if (physical->TryPortal(*ObjectCast::Cast<Portal>(vObjects[j]))) {
-            break;
-          }
+      for (size_t j = 0; j < vPortals.size(); ++j) {
+        if (physical->TryPortal(*vPortals[j])) {
+          break;
         }
       }
     }
@@ -269,13 +252,9 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
   //Create queries (if applicable)
   GLuint queries[GH_MAX_PORTALS];
   GLuint drawTest[GH_MAX_PORTALS];
-  int nbPortals = 0;
-  for (int ii = 0; ii < vObjects.size(); ii++)
-    if (ObjectCast::isFrom<Portal>(vObjects[ii]))
-      nbPortals++;
-  assert(nbPortals <= GH_MAX_PORTALS);
+  assert(vPortals.size() <= GH_MAX_PORTALS);
   if (occlusionCullingSupported) {
-    glGenQueriesARB((GLsizei)nbPortals, queries);
+    glGenQueriesARB((GLsizei)vPortals.size(), queries);
   }
 
   //Draw scene
@@ -291,34 +270,28 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
     if (occlusionCullingSupported && GH_REC_LEVEL > 0) {
       glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
       glDepthMask(GL_FALSE);
-      for (size_t i = 0; i < vObjects.size(); ++i) {
-        if (ObjectCast::isFrom<Portal>(vObjects[i])) {
-          if (ObjectCast::Cast<Portal>(vObjects[i]).get() != skipPortal) {
-            glBeginQueryARB(GL_SAMPLES_PASSED_ARB, queries[i]);
-            ObjectCast::Cast<Portal>(vObjects[i])->DrawPink(cam);
-            glEndQueryARB(GL_SAMPLES_PASSED_ARB);
-          }
+      for (size_t i = 0; i < vPortals.size(); ++i) {
+        if (vPortals[i].get() != skipPortal) {
+          glBeginQueryARB(GL_SAMPLES_PASSED_ARB, queries[i]);
+          vPortals[i]->DrawPink(cam);
+          glEndQueryARB(GL_SAMPLES_PASSED_ARB);
         }
       }
-      for (size_t i = 0; i < vObjects.size(); ++i) {
-        if (ObjectCast::isFrom<Portal>(vObjects[i])) {
-          if (ObjectCast::Cast<Portal>(vObjects[i]).get() != skipPortal) {
-            glGetQueryObjectuivARB(queries[i], GL_QUERY_RESULT_ARB, &drawTest[i]);
-          }
+      for (size_t i = 0; i < vPortals.size(); ++i) {
+        if (vPortals[i].get() != skipPortal) {
+          glGetQueryObjectuivARB(queries[i], GL_QUERY_RESULT_ARB, &drawTest[i]);
         }
       };
       glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
       glDepthMask(GL_TRUE);
-      glDeleteQueriesARB((GLsizei)nbPortals, queries);
+      glDeleteQueriesARB((GLsizei)vPortals.size(), queries);
     }
-    for (size_t i = 0; i < vObjects.size(); ++i) {
-      if (ObjectCast::isFrom<Portal>(vObjects[i])) {
-        if (ObjectCast::Cast<Portal>(vObjects[i]).get() != skipPortal) {
-          if (occlusionCullingSupported && (GH_REC_LEVEL > 0) && (drawTest[i] == 0)) {
-            continue;
-          } else {
-            ObjectCast::Cast<Portal>(vObjects[i])->Draw(cam, curFBO);
-          }
+    for (size_t i = 0; i < vPortals.size(); ++i) {
+      if (vPortals[i].get() != skipPortal) {
+        if (occlusionCullingSupported && (GH_REC_LEVEL > 0) && (drawTest[i] == 0)) {
+          continue;
+        } else {
+          vPortals[i]->Draw(cam, curFBO);
         }
       }
     }
@@ -505,6 +478,7 @@ void Engine::InitGLObjects() {
 void Engine::DestroyGLObjects() {
   curScene->Unload();
   vObjects.clear();
+  vPortals.clear();
 }
 
 void Engine::SetupInputs() {
@@ -546,10 +520,8 @@ void Engine::ConfineCursor() {
 
 float Engine::NearestPortalDist() const {
   float dist = FLT_MAX;
-  for (size_t i = 0; i < vObjects.size(); ++i) {
-    if (ObjectCast::isFrom<Portal>(vObjects[i])) {
-      dist = GH_MIN(dist, ObjectCast::Cast<Portal>(vObjects[i])->DistTo(player->m_pos));
-    }
+  for (size_t i = 0; i < vPortals.size(); ++i) {
+    dist = GH_MIN(dist, vPortals[i]->DistTo(player->pos));
   }
   return dist;
 }

@@ -1,6 +1,6 @@
 #include "HumbugEngine/FreeCamera.h"
-#include "HumbugEngine/Utils/GameHeader.h"
-#include "HumbugEngine/Core/Input.h"
+#include "HumbugEngine/GameHeader.h"
+#include "HumbugEngine/Input.h"
 #include <Windows.h>
 
 void FreeCamera::Reset()
@@ -23,7 +23,7 @@ void FreeCamera::Update()
 		Velocity.y = -FREECAMERA_VERTICAL_VELOCITY;
 	else Velocity.y = 0.0f;
 
-	m_pos += Velocity * GH_DT * FREECAMERA_SPEED_MULTIPLIER;
+	pos += Velocity * GH_DT * FREECAMERA_SPEED_MULTIPLIER;
 	Playable::Update();
 }
 

@@ -1,12 +1,10 @@
-#include "HumbugEngine/Components/Collider.h"
-#include "HumbugEngine/Utils/GameHeader.h"
+#include "HumbugEngine/Collider.h"
+#include "HumbugEngine/GameHeader.h"
 #include "GL/glew.h"
 #include <cassert>
 #include <iostream>
 
-Collider::Collider(const Vector3& a, const Vector3& b, const Vector3& c)
-  : Component("Collider")
-{
+Collider::Collider(const Vector3& a, const Vector3& b, const Vector3& c) {
   const Vector3 ab = b - a;
   const Vector3 bc = c - b;
   const Vector3 ca = a - c;
@@ -24,7 +22,7 @@ Collider::Collider(const Vector3& a, const Vector3& b, const Vector3& c)
 
 bool Collider::Collide(const Matrix4& localToUnit, Vector3& delta) const {
   //Get world delta
-  const Matrix4 local = localToUnit * m_mat;
+  const Matrix4 local = localToUnit * mat;
   const Vector3 v = -local.Translation();
 
   //Get axes
@@ -52,7 +50,7 @@ void Collider::DebugDraw(const Camera& cam, const Matrix4& objMat) {
   glBegin(GL_LINE_LOOP);
   glColor3f(0.0f, 1.0f, 0.0f);
 
-  const Matrix4 m = cam.Matrix() * objMat * m_mat;
+  const Matrix4 m = cam.Matrix() * objMat * mat;
   Vector4 v;
 
   v = m * Vector4(1, 1, 0, 1);
@@ -70,8 +68,8 @@ void Collider::DebugDraw(const Camera& cam, const Matrix4& objMat) {
 
 void Collider::CreateSorted(const Vector3& da, const Vector3& c, const Vector3& db) {
   assert(std::abs(da.Dot(db)) / (da.Mag() * db.Mag()) < 0.001f);
-  m_mat.MakeIdentity();
-  m_mat.SetTranslation(c);
-  m_mat.SetXAxis(da);
-  m_mat.SetYAxis(db);
+  mat.MakeIdentity();
+  mat.SetTranslation(c);
+  mat.SetXAxis(da);
+  mat.SetYAxis(db);
 }

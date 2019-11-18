@@ -1,14 +1,11 @@
-#include "HumbugEngine/Objects/Player.h"
-#include "HumbugEngine/Core/Input.h"
-#include "HumbugEngine/Utils/GameHeader.h"
+#include "HumbugEngine/Player.h"
+#include "HumbugEngine/Input.h"
+#include "HumbugEngine/GameHeader.h"
 #include <Windows.h>
 #include <iostream>
 
 Player::Player() {
-	Torch = std::make_shared<LightObject>(false);
-	Torch->AddComponent(std::make_shared<PointLight>
-		(m_pos + Vector3(0, GH_PLAYER_HEIGHT / 2, 0), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 0.8f, 0.8f)));
-	//Torch->AddComponent<PointLight>(m_pos + Vector3(0, GH_PLAYER_HEIGHT / 2, 0), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 0.8f, 0.8f));
+	Torch = std::make_shared<PointLight>(pos + Vector3(0, GH_PLAYER_HEIGHT / 2, 0), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 0.8f, 0.8f));
 	Reset();
 	hitSpheres.push_back(Sphere(Vector3(0, 0, 0), GH_PLAYER_RADIUS));
 	hitSpheres.push_back(Sphere(Vector3(0, GH_PLAYER_RADIUS - GH_PLAYER_HEIGHT, 0), GH_PLAYER_RADIUS));
@@ -21,13 +18,13 @@ void Player::Reset() {
   bob_phi = 0.0f;
   friction = 0.04f;
   drag = 0.002f;
-  ComponentCast::Cast<PointLight>(Torch->GetComponent<PointLight>())->MoveTo(m_pos + Vector3(0, GH_PLAYER_HEIGHT / 2, 0));
+  Torch->MoveTo(pos + Vector3(0, GH_PLAYER_HEIGHT / 2, 0));
   onGround = true;
 }
 
 void Player::Update() {
   //Update bobbing motion
-  float magT = (prev_pos - m_pos).Mag() / (GH_DT * p_scale);
+  float magT = (prev_pos - pos).Mag() / (GH_DT * p_scale);
   if (!onGround) { magT = 0.0f; }
   bob_mag = bob_mag*(1.0f - GH_BOB_DAMP) + magT*GH_BOB_DAMP;
   if (bob_mag < GH_BOB_MIN) {
@@ -47,10 +44,10 @@ void Player::Update() {
 
   // Switch On/Off Torch
   if (GH_INPUT->key_press['F'])
-	  ComponentCast::Cast<PointLight>(Torch->GetComponent<PointLight>())->On = !ComponentCast::Cast<PointLight>(Torch->GetComponent<PointLight>())->On;
+	  Torch->On = !Torch->On;
 
   //Update Torch Position
-  ComponentCast::Cast<PointLight>(Torch->GetComponent<PointLight>())->MoveTo(m_pos + Vector3(0, GH_PLAYER_HEIGHT / 2, 0));
+  Torch->MoveTo(pos + Vector3(0, GH_PLAYER_HEIGHT / 2, 0));
 
 #if 0
   //Running

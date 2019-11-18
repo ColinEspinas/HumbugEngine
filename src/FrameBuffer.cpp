@@ -1,11 +1,9 @@
-#include "HumbugEngine/Components/FrameBuffer.h"
-#include "HumbugEngine/Utils/GameHeader.h"
-#include "HumbugEngine/Core/Engine.h"
+#include "HumbugEngine/FrameBuffer.h"
+#include "HumbugEngine/GameHeader.h"
+#include "HumbugEngine/Engine.h"
 #include <iostream>
 
-FrameBuffer::FrameBuffer()
-  : Component("FrameBuffer")
-{
+FrameBuffer::FrameBuffer() {
   glGenTextures(1, &texId);
   glBindTexture(GL_TEXTURE_2D, texId);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
@@ -35,9 +33,8 @@ FrameBuffer::FrameBuffer()
   glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
-int FrameBuffer::Use() {
+void FrameBuffer::Use() {
   glBindTexture(GL_TEXTURE_2D, texId);
-  return (int)texId;
 }
 
 void FrameBuffer::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) {

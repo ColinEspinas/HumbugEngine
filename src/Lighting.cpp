@@ -1,9 +1,7 @@
-#include "HumbugEngine/Core/Lighting.h"
-#include "HumbugEngine/Components/MeshRenderer.h"
+#include "HumbugEngine/Lighting.h"
 
-
-Lighting::Lighting(PObjectVec & vLights)
-	: m_LightsContainer(vLights)
+Lighting::Lighting(std::vector<std::shared_ptr<Light>> & vLights)
+	: m_Lights(vLights)
 {
 }
 
@@ -20,11 +18,11 @@ void Lighting::RenderAllLights(std::vector<std::shared_ptr<Object>> vObjects)
 
 void Lighting::RenderLights(std::shared_ptr<Object> Object)
 {
-	if (Object->Contain<MeshRenderer>())
-		for (auto container : m_LightsContainer)
-			for (auto light : container->GetComponents<Light>())
-				for (auto Mesh : ComponentCast::Cast<MeshRenderer>(Object->GetComponent<MeshRenderer>())->GetAllMesh())
-					ComponentCast::Cast<Light>(light)->Use(Mesh->shader);
+	if (Object->shader) {
+		for (auto light : m_Lights) {
+			light->Use(Object->shader);
+		}
+	}
 }
 
 void Lighting::RenderDepthMap()
@@ -51,20 +49,11 @@ void Lighting::RenderDepthMap()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-size_t Lighting::getLightsCount()
-{
-	unsigned int count = 0;
-	for (auto container : m_LightsContainer) {
-		count += container->GetComponents<Light>().size();
-	}
-	return count;
-}
-
 size_t Lighting::getPointLightsCount()
 {
 	unsigned int count = 0;
-	for (auto container : m_LightsContainer) {
-		count += container->GetComponents<PointLight>().size();
+	for (auto light : m_Lights) {
+		if (std::static_pointer_cast<PointLight>(light)) count++;
 	}
 	return count;
 }
@@ -72,8 +61,8 @@ size_t Lighting::getPointLightsCount()
 size_t Lighting::getDirLightsCount()
 {
 	unsigned int count = 0;
-	for (auto container : m_LightsContainer) {
-		count += container->GetComponents<DirLight>().size();
+	for (auto light : m_Lights) {
+		if (std::static_pointer_cast<DirLight>(light)) count++;
 	}
 	return count;
 }

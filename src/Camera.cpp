@@ -1,10 +1,9 @@
-#include "HumbugEngine/Components/Camera.h"
-#include "HumbugEngine/Utils/GameHeader.h"
+#include "HumbugEngine/Camera.h"
+#include "HumbugEngine/GameHeader.h"
 #include <GL/glew.h>
 #include <cmath>
 
 Camera::Camera() :
-	Component("Camera"),
 	width(256),
 	height(256) {
 	worldView.MakeIdentity();

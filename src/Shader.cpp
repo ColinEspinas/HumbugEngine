@@ -1,10 +1,8 @@
-#include "HumbugEngine/Ressources/Shader.h"
+#include "HumbugEngine/Shader.h"
 #include <fstream>
 #include <sstream>
 
-Shader::Shader(const char* name)
-  : Ressource("Shader", name)
-{
+Shader::Shader(const char* name) {
   //Get the file paths
   const std::string vert = "assets/shaders/" + std::string(name) + ".vert";
   const std::string frag = "assets/shaders/" + std::string(name) + ".frag";
@@ -12,9 +10,6 @@ Shader::Shader(const char* name)
   //Load the shaders from disk
   vertId = LoadShader(vert.c_str(), GL_VERTEX_SHADER);
   fragId = LoadShader(frag.c_str(), GL_FRAGMENT_SHADER);
-
-  /// DEBUG
-  // std::cout << vertId << " | " << fragId << std::endl;
 
   //Create the program
   progId = glCreateProgram();
@@ -64,11 +59,6 @@ Shader::~Shader() {
 
 void Shader::Use() {
   glUseProgram(progId);
-}
-
-void Shader::_Load(std::string _path)
-{
-  // TODO
 }
 
 GLuint Shader::LoadShader(const char* fname, GLenum type) {

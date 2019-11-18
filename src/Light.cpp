@@ -1,4 +1,4 @@
-#include "HumbugEngine/Components/Light.h"
+#include "HumbugEngine/Light.h"
 
 void Light::Use(std::shared_ptr<Shader> & objectShader)
 {

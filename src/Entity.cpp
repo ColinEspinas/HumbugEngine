@@ -1,14 +1,12 @@
-#include "HumbugEngine/Physics/Entity.h"
+#include "HumbugEngine/Entity.h"
 
 Entity::Entity(std::shared_ptr<Object>& obj, std::shared_ptr<PhysicRuleset>& pR)
 	: physics(pR)
 {
 	Reset();
-	if (obj->Contain<MeshRenderer>())
-	{
-		this->RemoveComponent<MeshRenderer>();
-		AddComponent(obj->GetComponent<MeshRenderer>());
-	}
+	this->mesh = obj->mesh;
+	this->texture = obj->texture;
+	this->shader = obj->shader;
 	physics->SetBody(this);
 }
 

@@ -1,10 +1,10 @@
-#include "HumbugEngine/Components/DirLight.h"
+#include "HumbugEngine/DirLight.h"
 #include <string>
 
 unsigned int DirLight::m_Count = 0;
 
 DirLight::DirLight(Vector3 Direction, Vector3 Ambient, Vector3 Diffuse, Vector3 Specular)
-	: m_Direction(Direction), Light("DirLight")
+	: m_Direction(Direction)
 {
 	m_Ambient = Ambient;
 	m_Diffuse = Diffuse;

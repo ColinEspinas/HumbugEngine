@@ -1,6 +1,6 @@
 #pragma once
-#include "HumbugEngine/Ressources/Objects/MazeRoom/MazeRoom.h"
-#include "HumbugEngine/Objects/Portal.h"
+#include "./MazeRoom.h"
+#include "..\..\..\Portal.h"
 #include <array>
 #include <time.h>
 
@@ -70,7 +70,7 @@ class Maze
 {
 public:
 	Maze(const unsigned int seed = time(NULL), int nSection = 4, int width = 4, int height = 4, int nJonction = 2);
-	void Apply(PObjectVec& Objects);
+	void Apply(PObjectVec& Objects, PPortalVec& Portals);
 
 	const int amountOfSection, SectionWidth, SectionHeight;
 
