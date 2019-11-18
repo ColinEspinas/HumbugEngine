@@ -5,10 +5,11 @@
 #include "HumbugEngine/Objects/Player.h"
 
 Object::Object() :
-  m_pos(0.0f),
-  m_euler(0.0f),
-  m_scale(1.0f),
-  p_scale(1.0f)
+	m_pos(0.0f),
+	m_euler(0.0f),
+	m_scale(1.0f),
+	p_scale(1.0f),
+	m_components(0)
 {
 	// if (!material) material = std::make_shared<Material>("__Default");
 }

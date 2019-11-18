@@ -65,7 +65,7 @@ Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL),
 
   LoadScene(1); // CHANGED
 
-  sky.reset(std::make_shared<Sky>().get());
+  sky.reset(new Sky);
 }
 
 Engine::~Engine() {

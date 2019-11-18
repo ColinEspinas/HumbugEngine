@@ -125,9 +125,9 @@ template<class C>
 inline PComponentVec Object::GetComponents()
 {
 	PComponentVec comps;
-	for (auto component : m_components) {
-		if (std::dynamic_pointer_cast<C>(component)) {
-			comps.push_back(component);
+	for (int ii = 0; ii < m_components.size(); ii++) {
+		if (std::dynamic_pointer_cast<C>(m_components[ii])) {
+			comps.push_back(m_components[ii]);
 		}
 	}
 	return comps;
