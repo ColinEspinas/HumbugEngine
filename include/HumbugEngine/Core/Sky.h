@@ -13,6 +13,7 @@ public:
     glDepthMask(GL_FALSE);
     const Matrix4 mvp = cam.projection.Inverse();
     const Matrix4 mv = cam.worldView.Inverse();
+	//std::cout << (shader == nullptr) << std::endl; // DEBUG
     shader->Use();
     shader->SetMVP(mvp.m, mv.m);
     mesh->Draw();

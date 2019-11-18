@@ -25,7 +25,7 @@ public:
 
   virtual int Cast() const override { return 1; }
 
-  std::shared_ptr<LightObject> getTorch() const { return Torch; }
+  std::shared_ptr<LightObject> getTorch() { return Torch; }
 
 private:
 

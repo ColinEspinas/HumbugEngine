@@ -55,7 +55,15 @@ Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL),
   vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level5>()));
   vScenes.push_back(std::shared_ptr<Scene>(std::make_shared<Level6>()));
 
-  LoadScene(0);
+  //vScenes.push_back(std::shared_ptr<Scene>(new Level_1));
+  //vScenes.push_back(std::shared_ptr<Scene>(new Level2(3)));
+  //vScenes.push_back(std::shared_ptr<Scene>(new Level2(6)));
+  //vScenes.push_back(std::shared_ptr<Scene>(new Level3()));
+  //vScenes.push_back(std::shared_ptr<Scene>(new Level4));
+  //vScenes.push_back(std::shared_ptr<Scene>(new Level5));
+  //vScenes.push_back(std::shared_ptr<Scene>(new Level6));
+
+  LoadScene(1); // CHANGED
 
   sky.reset(std::make_shared<Sky>().get());
 }
@@ -182,8 +190,10 @@ void Engine::LoadScene(int ix) {
 
 void Engine::Update() {
   //Update
+	for (int ii = 0; ii < vObjects.size(); ii++) std::cout << (vObjects[ii] != nullptr) << " "; //DEBUG
   for (size_t i = 0; i < vObjects.size(); ++i) {
-    assert(vObjects[i].get());
+	  if (vObjects[i].get() == nullptr) continue; // CHANGED
+    //assert(vObjects[i].get());
     vObjects[i]->Update();
   }
 

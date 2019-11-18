@@ -2,7 +2,7 @@
 
 // Scene Constructor
 Scene::Scene()
-    : m_Objects(0)
+	: m_Objects{ 0 }
 {
 }
 
