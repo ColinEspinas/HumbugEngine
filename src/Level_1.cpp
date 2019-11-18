@@ -1,7 +1,7 @@
 #include "HumbugEngine/Ressources/Levels/Level_1.h"
 #include "HumbugEngine/Ground.h"
-#include "HumbugEngine\Ressources\Objects\TestObj.h"
-#include "HumbugEngine\Ressources\Objects\MazeRoom\Maze.h"
+#include "HumbugEngine/Ressources/Objects/TestObj.h"
+#include "HumbugEngine/Ressources/Objects/MazeRoom/Maze.h"
 
 void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, Player & player)
 {

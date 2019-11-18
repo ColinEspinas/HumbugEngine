@@ -1,5 +1,5 @@
 #pragma once
-#include "..\..\Scene.h"
+#include "HumbugEngine/Scene.h"
 
 class Level_1 : public Scene
 {
