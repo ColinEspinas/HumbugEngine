@@ -7,8 +7,8 @@ void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, P
 {
 	lights.push_back(player.getTorch());
 
-	Maze M(3);
-	M.Apply(objs, portals);
+	//Maze M(3);
+	//M.Apply(objs, portals);
 
 
 	/*//
@@ -54,10 +54,14 @@ void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, P
 	//*/
 	
 
-	/*//
-	std::shared_ptr<TestObj> MazeRoom1(new TestObj("MazeRoom/Maze001.obj", 2.5f));
-	MazeRoom1->pos += Vector3(5.0f, 0, 0);
-	objs.push_back(MazeRoom1);
+	//*//
+	std::shared_ptr<TestObj> testOBJ(new TestObj("Church.obj", 15e-3f));
+	//testOBJ->pos += Vector3(5.0f, 0, 0);
+	objs.push_back(testOBJ);
+
+	std::shared_ptr<Ground> ground(std::make_shared<Ground>());
+	ground->scale *= 1.2f;
+	objs.push_back(ground);
 	//*/
 
 	player.SetPosition(Vector3(0, GH_PLAYER_HEIGHT, 0));
