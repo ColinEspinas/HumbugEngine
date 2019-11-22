@@ -1,5 +1,6 @@
 #include "HumbugEngine/PointLight.h"
 #include <string>
+#include <math.h>
 
 unsigned int PointLight::m_Count = 0;
 
@@ -28,6 +29,12 @@ void PointLight::Use(std::shared_ptr<Shader>& objectShader)
 
 	// TO CHANGE AS SOON AS POSSIBLE
 	if (!this->On) glUniform3f(glGetUniformLocation(objectShader->GetProgId(), std::string(IdString + ".position").c_str()), 100, -100, 100);
+}
+
+bool PointLight::isVisibleFrom(Vector3 pos) const
+{
+	float d = (pos - m_Position).Mag();
+	return (m_Quadratic * d * d + m_Linear * d + m_Constant > GH_MIN_LIGHT_INTENSITY);
 }
 
 void PointLight::MoveTo(Vector3 newPos)

@@ -1,6 +1,7 @@
 #pragma once
 #include "HumbugEngine/Object.h"
 #include "HumbugEngine/Shader.h"
+#include <limits>
 
 class Light
 {
@@ -11,6 +12,10 @@ public:
 	virtual void Use(std::shared_ptr<Shader> & objectShader) = 0;
 
 	bool On = true;
+
+	virtual bool isVisibleFrom(Vector3 pos) const { return true; }
+
+	Vector3 getPosition() const { return m_Position; }
 
 protected:
 	Vector3 m_Position;

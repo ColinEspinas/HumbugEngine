@@ -5,12 +5,13 @@
 #include "HumbugEngine/Object.h"
 #include "HumbugEngine/Shader.h"
 #include "HumbugEngine/Resources.h"
+#include "HumbugEngine/Portal.h"
 #include <vector>
 
 class Lighting
 {
 public:
-	Lighting(std::vector<std::shared_ptr<Light>> & vLights);
+	Lighting(std::vector<std::shared_ptr<Light>> & vLights, PPortalVec & vPortals);
 	~Lighting();
 
 	void RenderAllLights(std::vector<std::shared_ptr<Object>> vObjects);
@@ -23,6 +24,7 @@ public:
 
 private:
 	std::vector<std::shared_ptr<Light>> & m_Lights;
+	PPortalVec & m_Portals;
 	//std::shared_ptr<Shader> shadowShader = AquireShader("");
 };
 typedef std::vector<std::shared_ptr<Light>> PLightVec;

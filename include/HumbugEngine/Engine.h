@@ -54,7 +54,7 @@ private:
   Input input;
   Timer timer;
 
-  Lighting lighting = Lighting(vLights);
+  Lighting lighting = Lighting(vLights, vPortals);
 
   std::vector<std::shared_ptr<Object>> vObjects;
   std::vector<std::shared_ptr<Portal>> vPortals;

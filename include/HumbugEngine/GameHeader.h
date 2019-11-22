@@ -64,3 +64,6 @@ template<class T>
 inline T GH_MAX(T a, T b) {
   return a > b ? a : b;
 }
+
+// Added Engine Variables
+static const float GH_MIN_LIGHT_INTENSITY = 0.1f;
