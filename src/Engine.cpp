@@ -11,8 +11,7 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
-
-
+#include "HumbugEngine/AudioMaster.h"
 #include "HumbugEngine/Ressources/Levels/Level_1.h"
 
 Engine* GH_ENGINE = nullptr;
@@ -30,6 +29,11 @@ LRESULT WINAPI StaticWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 }
 
 Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL) {
+
+  Vector3 pos( 0.f, 0.f, 0.f );
+  Vector3 speed (0.f, 0.f, 0.f);
+  std::vector<float> orientation = { 0.f, 0.f, 1.f, 0.f, 1.f, 0.f };
+  MASTER->setListener(pos, speed, orientation);
   GH_ENGINE = this;
   GH_INPUT = &input;
   isFullscreen = false;
@@ -60,6 +64,7 @@ Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL) {
 }
 
 Engine::~Engine() {
+  MASTER->ShutdownOpenAL();
   ClipCursor(NULL);
   wglMakeCurrent(NULL, NULL);
   ReleaseDC(hWnd, hDC);
@@ -239,6 +244,12 @@ void Engine::Update() {
       }
     }
   }
+
+  // Audio 
+  Vector3 speed ( 0.f, 0.f, 0.f );
+  std::vector<float> orientation = { 0.f, 0.f, 1.f, 0.f, 1.f, 0.f };
+  
+  MASTER->updateListener(player->pos, speed, orientation);
 }
 
 void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) {

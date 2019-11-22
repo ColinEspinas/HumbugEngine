@@ -81,4 +81,9 @@ void Level2::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, Play
   }
 
   player.SetPosition(Vector3(3, GH_PLAYER_HEIGHT, 3));
+
+  std::shared_ptr<AudioSource> vague = std::make_shared<AudioSource>(Vector3(0.0f, 0.0f, 0.0f));
+  vague->loadSong("assets/audio/music.wav");
+  MASTER->showSources();
+  vague->play();
 }

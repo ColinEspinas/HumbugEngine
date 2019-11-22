@@ -3,6 +3,7 @@
 #include "HumbugEngine/Portal.h"
 #include "HumbugEngine/Player.h"
 #include "HumbugEngine/Lighting.h"
+#include "HumbugEngine/AudioMaster.h"
 
 class Scene {
 public:

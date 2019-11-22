@@ -39,9 +39,10 @@ add_subdirectory(deps/glew EXCLUDE_FROM_ALL)
 #
 set(OPENAL_DIR_SDK "deps/OpenAL")
 set(OPENAL_INCLUDE_DIR "${OPENAL_DIR_SDK}/include")
-set(OPENAL_LIBRARY_DIR "${OPENAL_DIR_SDK}/libs/Win32")
+set(OPENAL_LIBRARY_DIR "${OPENAL_DIR_SDK}/libs/Win64")
 
 find_library(OPENAL_LIBRARY NAMES OpenAL32.lib PATHS "${OPENAL_LIBRARY_DIR}" DOC "OpenAL library")
+#set_target_properties(${OPENAL_LIBRARY} PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 
 
 #

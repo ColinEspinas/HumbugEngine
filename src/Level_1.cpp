@@ -61,4 +61,5 @@ void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, P
 	//*/
 
 	player.SetPosition(Vector3(0, GH_PLAYER_HEIGHT, 0));
+
 }
