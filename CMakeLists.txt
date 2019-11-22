@@ -33,12 +33,33 @@ file(COPY ${ULTRALIGHT_BIN_DIR} DESTINATION ${CMAKE_BINARY_DIR})
 add_definitions(-DGLEW_STATIC)
 add_subdirectory(deps/glew EXCLUDE_FROM_ALL)
 
+
+#
+# OpenAL
+#
+set(OPENAL_DIR_SDK "deps/OpenAL")
+set(OPENAL_INCLUDE_DIR "${OPENAL_DIR_SDK}/include")
+set(OPENAL_LIBRARY_DIR "${OPENAL_DIR_SDK}/libs/Win32")
+
+find_library(OPENAL_LIBRARY NAMES OpenAL32.lib PATHS "${OPENAL_LIBRARY_DIR}" DOC "OpenAL library")
+
+
+#
+# sndfile
+#
+set(SNDFILE_DIR_SDK "deps/Sndfile")
+find_library(SNDFILE_LIBRARY NAMES libsndfile-1.lib PATHS "${SNDFILE_DIR_SDK}" DOC "sndfile library")
+
+
 #
 # Headers
 #
 include_directories(
     ${PROJECT_SOURCE_DIR}/include
 	${ULTRALIGHT_INCLUDE_DIR}
+	${OPENAL_INCLUDE_DIR}
+	${SNDFILE_DIR_SDK}
+
 )
 
 #
@@ -56,6 +77,8 @@ target_link_libraries(
 	${ULTRALIGHTCORE_LIBRARY}
 	${WEBCORE_LIBRARY}
 	${APPCORE_LIBRARY}
+	${OPENAL_LIBRARY}
+	${SNDFILE_LIBRARY}
 )
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
