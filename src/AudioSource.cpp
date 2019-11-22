@@ -28,9 +28,8 @@ void AudioSource::setDistance(float distance)
 {
 	std::cout << "distanc in gain:" << distance<<std::endl;
 
-	std::cout << "I1:" << (distance - AL_REFERENCE_DISTANCE) << std::endl;
-	std::cout << "I2" << (AL_REFERENCE_DISTANCE + AL_ROLLOFF_FACTOR) << std::endl;
-	float max = 180;
+	float max = 3.0f;
+	distance = (distance - 0.0f) / (max - 0.0f);
 	float gain = (max - distance)/ max;
 	gain = GH_CLAMP(gain, 0.0f, 1.0f);
 	std::cout << "gain:" << gain;

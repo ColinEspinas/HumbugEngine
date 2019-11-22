@@ -82,7 +82,7 @@ void AudioMaster::updateListener(Vector3 pos, Vector3 speed, std::vector<float> 
 
 	for (int i = 0; i < m_sources.size();++i) {
 		Vector3 sourcePos = m_sources[i]->getPosition();
-		float distance = pow((sourcePos - pos).Mag(),3.0f);
+		float distance = (sourcePos - pos).Mag();
 		std::cout << "posSOURCE:" << sourcePos << std::endl;
 		std::cout << "pos:" << pos << std::endl;
 		std::cout <<"distance:"<< distance<<std::endl;
