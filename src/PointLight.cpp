@@ -12,6 +12,7 @@ PointLight::PointLight(Vector3 Position, float Constant, float Linear, float Qua
 	m_Specular = Specular;
 	m_Id = m_Count;
 	++m_Count;
+	
 }
 
 void PointLight::Use(std::shared_ptr<Shader>& objectShader)
