@@ -16,6 +16,7 @@ public:
 	virtual bool isVisibleFrom(Vector3 pos) const { return true; }
 
 	Vector3 getPosition() const { return m_Position; }
+	virtual void UseAt(std::shared_ptr<Shader> & objectShader, Vector3 pos) { Use(objectShader); }
 
 protected:
 	Vector3 m_Position;

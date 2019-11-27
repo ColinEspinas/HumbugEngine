@@ -19,6 +19,7 @@ void Lighting::RenderAllLights(std::vector<std::shared_ptr<Object>> vObjects)
 void Lighting::RenderLights(std::shared_ptr<Object> Object)
 {
 	if (Object->shader) {
+
 		// Local Lights
 		for (auto light : m_Lights) {
 			if (light->isVisibleFrom(Object->pos)) {
@@ -27,19 +28,18 @@ void Lighting::RenderLights(std::shared_ptr<Object> Object)
 		}
 
 		// Portal Bounded Lights
-		for (auto portal : m_Portals) {
-			for (auto warp : {portal->front, portal->back}) {
-				Matrix4 saved_FromToTo = warp.fromPortal->LocalToWorld() * warp.toPortal->WorldToLocal();
-				for (auto light : m_Lights) {
-					if (light->isVisibleFrom(warp.fromPortal->pos)) {
-						Vector3 throughPortalPosition = warp.toPortal->LocalToWorld().MulPoint
-							(saved_FromToTo.MulPoint(light->getPosition()));
-						// From One to the Other
-						// TODO: Use Light at Specified Position
-					}
-				}
-			}
-		}
+		//for (auto portal : m_Portals) {
+		//	for (auto warp : {portal->front, portal->back}) {
+		//		Matrix4 saved_FromToTo = warp.fromPortal->LocalToWorld();;
+		//		for (auto light : m_Lights) {
+		//			if (light->isVisibleFrom(warp.fromPortal->pos)) {
+		//				Vector3 throughPortalPosition = saved_FromToTo.MulPoint(light->getPosition());
+		//				// From One to the Other
+		//				//light->UseAt(Object->shader, throughPortalPosition);
+		//			}
+		//		}
+		//	}
+		//}
 	}
 }
 

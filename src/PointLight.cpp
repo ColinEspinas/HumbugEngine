@@ -17,9 +17,14 @@ PointLight::PointLight(Vector3 Position, float Constant, float Linear, float Qua
 
 void PointLight::Use(std::shared_ptr<Shader>& objectShader)
 {
+	UseAt(objectShader, m_Position);
+}
+
+void PointLight::UseAt(std::shared_ptr<Shader> & objectShader, Vector3 _pos)
+{
 	std::string IdString = std::string("pointLights[" + std::to_string(m_Id) + "]");
 	glUniform1i(glGetUniformLocation(objectShader->GetProgId(), "pointLightsCount"), getCount());
-	glUniform3f(glGetUniformLocation(objectShader->GetProgId(), std::string(IdString + ".position").c_str()), m_Position.x, m_Position.y, m_Position.z);
+	glUniform3f(glGetUniformLocation(objectShader->GetProgId(), std::string(IdString + ".position").c_str()), _pos.x, _pos.y, _pos.z);
 	glUniform3f(glGetUniformLocation(objectShader->GetProgId(), std::string(IdString + ".ambient").c_str()), m_Ambient.x, m_Ambient.y, m_Ambient.z);
 	glUniform3f(glGetUniformLocation(objectShader->GetProgId(), std::string(IdString + ".diffuse").c_str()), m_Diffuse.x, m_Diffuse.y, m_Diffuse.z);
 	glUniform3f(glGetUniformLocation(objectShader->GetProgId(), std::string(IdString + ".specular").c_str()), m_Specular.x, m_Specular.y, m_Specular.z);

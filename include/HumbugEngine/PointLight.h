@@ -16,6 +16,7 @@ public:
 	~PointLight() { --m_Count; };
 
 	void Use(std::shared_ptr<Shader> & objectShader) override;
+	void UseAt(std::shared_ptr<Shader> & objectShader, Vector3 pos) override;
 	static unsigned int getCount() { return m_Count; }
 
 	bool isVisibleFrom(Vector3 pos) const override;
