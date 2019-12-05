@@ -10,7 +10,7 @@ public:
     } else {
       mesh = AquireMesh("ground.obj");
     }
-    shader = AquireShader("texture");
+    shader = LoadLightAdaptedShader();
     texture = AquireTexture("checker_green.bmp");
     scale = Vector3(10, 1, 10);
   }

@@ -29,6 +29,8 @@ public:
 
   void DebugDraw(const Camera& cam);
 
+  std::shared_ptr<Shader> LoadLightAdaptedShader();
+
   Matrix4 LocalToWorld() const;
   Matrix4 WorldToLocal() const;
   Vector3 Forward() const;

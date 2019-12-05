@@ -6,7 +6,7 @@ class Statue : public Object {
 public:
   Statue(const char* model) {
     mesh = AquireMesh(model);
-    shader = AquireShader("texture");
+    shader = LoadLightAdaptedShader();
     texture = AquireTexture("gold.bmp");
   }
   virtual ~Statue() {}

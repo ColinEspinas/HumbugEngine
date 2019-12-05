@@ -16,7 +16,7 @@ public:
 	MazeRoom_0()
 	{
 		mesh = AquireMesh("MazeRoom/Maze000.obj");
-		shader = AquireShader("texture");
+		shader = LoadLightAdaptedShader();
 		texture = AquireTexture("Bush.bmp");
 		scale = Vector3(2.5f);
 		euler += Vector3(3 * GH_PI / 2, 0, 0);
@@ -32,7 +32,7 @@ public:
 	MazeRoom_1()
 	{
 		mesh = AquireMesh("MazeRoom/Maze001.obj");
-		shader = AquireShader("texture");
+		shader = LoadLightAdaptedShader();
 		texture = AquireTexture("Bush.bmp");
 		scale = Vector3(2.5f);
 		euler += Vector3(3 * GH_PI / 2, 0, 0);
@@ -48,7 +48,7 @@ public:
 	MazeRoom_2()
 	{
 		mesh = AquireMesh("MazeRoom/Maze002.obj");
-		shader = AquireShader("texture");
+		shader = LoadLightAdaptedShader();
 		texture = AquireTexture("Bush.bmp");
 		scale = Vector3(2.5f);
 		euler += Vector3(3 * GH_PI / 2, 0, 0);
@@ -64,7 +64,7 @@ public:
 	MazeRoom_3()
 	{
 		mesh = AquireMesh("MazeRoom/Maze003.obj");
-		shader = AquireShader("texture");
+		shader = LoadLightAdaptedShader();
 		texture = AquireTexture("Bush.bmp");
 		scale = Vector3(2.5f);
 		euler += Vector3(3 * GH_PI / 2, 0, 0);
@@ -80,7 +80,7 @@ public:
 	MazeRoom_4()
 	{
 		mesh = AquireMesh("MazeRoom/Maze004.obj");
-		shader = AquireShader("texture");
+		shader = LoadLightAdaptedShader();
 		texture = AquireTexture("Bush.bmp");
 		scale = Vector3(2.5f);
 		euler += Vector3(3 * GH_PI / 2, 0, 0);
@@ -96,7 +96,7 @@ public:
 	MazeRoom_5()
 	{
 		mesh = AquireMesh("MazeRoom/Maze005.obj");
-		shader = AquireShader("texture");
+		shader = LoadLightAdaptedShader();
 		texture = AquireTexture("Bush.bmp");
 		scale = Vector3(2.5f);
 		euler += Vector3(3 * GH_PI / 2, 0, 0);

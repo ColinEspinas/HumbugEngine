@@ -6,7 +6,7 @@ class Pillar : public Object {
 public:
   Pillar() {
     mesh = AquireMesh("pillar.obj");
-    shader = AquireShader("texture");
+    shader = LoadLightAdaptedShader();
     texture = AquireTexture("white.bmp");
     scale = Vector3(0.1f);
   }

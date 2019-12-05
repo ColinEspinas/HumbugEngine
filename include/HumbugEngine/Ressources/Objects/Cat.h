@@ -8,7 +8,7 @@ public:
 	Cat()
 	{
 		mesh = AquireMesh("cat.obj");
-		shader = AquireShader("texture");
+		shader = LoadLightAdaptedShader();
 		texture = AquireTexture("white.bmp");
 		scale = Vector3(1e-2f);
 	}

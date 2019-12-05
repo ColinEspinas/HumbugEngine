@@ -6,7 +6,7 @@ class House : public Object {
 public:
   House(const char* tex) {
     mesh = AquireMesh("square_rooms.obj");
-    shader = AquireShader("texture");
+    shader = LoadLightAdaptedShader();
     texture = AquireTexture(tex);
     scale = Vector3(1.0f, 3.0f, 1.0f);
   }

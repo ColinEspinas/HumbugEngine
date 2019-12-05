@@ -65,6 +65,20 @@ void Lighting::RenderDepthMap()
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	// // 1. first render to depth map
+	// glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+	// glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+	// 	glClear(GL_DEPTH_BUFFER_BIT);
+	// 	ConfigureShaderAndMatrices();
+	// 	RenderScene();
+	// glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	// // 2. then render scene as normal with shadow mapping (using depth map)
+	// glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+	// glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	// ConfigureShaderAndMatrices();
+	// glBindTexture(GL_TEXTURE_2D, depthMap);
+	// RenderScene();
 }
 
 size_t Lighting::getPointLightsCount()

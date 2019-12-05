@@ -53,3 +53,9 @@ void Object::DebugDraw(const Camera& cam) {
     mesh->DebugDraw(cam, LocalToWorld());
   }
 }
+
+std::shared_ptr<Shader> Object::LoadLightAdaptedShader(){
+  if (GH_APPLY_COMPLEXED_LIGHTING)
+    return AquireShader("texture");
+  else return AquireShader("texture_old");
+}

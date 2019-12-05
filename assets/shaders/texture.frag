@@ -53,22 +53,18 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 
 void main(void) {
 
-	vec3 norm = normalize(ex_normal);
-	vec3 viewDir = normalize(viewPos - frag_pos);
+    vec3 norm = normalize(ex_normal);
+    vec3 viewDir = normalize(viewPos - frag_pos);
 
-	vec3 result;
+    vec3 result;
 
-	for(int i = 0; i < dirLightsCount; ++i)
-		result += CalcDirLight(dirLights[i], norm, viewDir); 
-	
-	for(int i = 0; i < pointLightsCount; ++i)
-		result += CalcPointLight(pointLights[i], norm, frag_pos, viewDir); 
+    for(int i = 0; i < dirLightsCount; ++i)
+        result += CalcDirLight(dirLights[i], norm, viewDir); 
+    
+    for(int i = 0; i < pointLightsCount; ++i)
+        result += CalcPointLight(pointLights[i], norm, frag_pos, viewDir); 
 
-	gl_FragColor = vec4(result, 1.0);
-
-//	 Base shader
-//	float s = dot(ex_normal, LIGHT)*0.5 + 0.5;
-//	gl_FragColor = vec4(texture(tex, ex_uv).rgb * s, 1.0);
+    gl_FragColor = vec4(result, 1.0);
 }
 
 // Calculates the color when using a directional light.

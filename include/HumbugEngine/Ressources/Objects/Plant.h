@@ -8,7 +8,7 @@ public:
 	Plant()
 	{
 		mesh = AquireMesh("Plant.obj");
-		shader = AquireShader("texture");
+		shader = LoadLightAdaptedShader();
 		texture = AquireTexture("white.bmp");
 		scale = Vector3(1e-1f);
 	}

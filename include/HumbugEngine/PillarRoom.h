@@ -6,7 +6,7 @@ class PillarRoom : public Object {
 public:
   PillarRoom() {
     mesh = AquireMesh("pillar_room.obj");
-    shader = AquireShader("texture");
+    shader = LoadLightAdaptedShader();
     texture = AquireTexture("three_room.bmp");
     scale = Vector3(1.1f);
   }

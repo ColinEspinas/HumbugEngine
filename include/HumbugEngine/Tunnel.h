@@ -17,7 +17,7 @@ public:
     } else {
       mesh = AquireMesh("tunnel.obj");
     }
-    shader = AquireShader("texture");
+    shader = LoadLightAdaptedShader();
     texture = AquireTexture("checker_gray.bmp");
   }
   virtual ~Tunnel() {}

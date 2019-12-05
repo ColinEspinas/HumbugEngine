@@ -67,3 +67,4 @@ inline T GH_MAX(T a, T b) {
 
 // Added Engine Variables
 static const float GH_MIN_LIGHT_INTENSITY = 0.1f;
+static const bool GH_APPLY_COMPLEXED_LIGHTING = false;
