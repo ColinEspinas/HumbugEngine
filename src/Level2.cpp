@@ -1,6 +1,7 @@
 #include "HumbugEngine/Level2.h"
 #include "HumbugEngine/House.h"
 
+
 void Level2::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, Player& player) {
 	lights.push_back(player.getTorch());
 

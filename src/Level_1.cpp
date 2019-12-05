@@ -2,6 +2,7 @@
 #include "HumbugEngine/Ground.h"
 #include "HumbugEngine/Ressources/Objects/TestObj.h"
 #include "HumbugEngine/Ressources/Objects/MazeRoom/Maze.h"
+#include "HumbugEngine/Ressources/Objects/Armoire.h"
 
 void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, Player & player)
 {
@@ -60,9 +61,21 @@ void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, P
 	objs.push_back(testOBJ);
 
 	std::shared_ptr<Ground> ground(std::make_shared<Ground>());
-	ground->scale *= 1.2f;
+	ground->scale *= 1.6f;
 	objs.push_back(ground);
 	//*/
+
+	std::shared_ptr<TestObj> armoire(new TestObj("armoire.obj",1.0f,"wood.bmp"));
+	armoire->pos = Vector3(4.0f, 0.0f, 10.f);
+	armoire->scale = Vector3(.015f);
+	armoire->euler.y = GH_PI / 2;
+	objs.push_back(armoire);
+
+	std::shared_ptr<TestObj> champi(new TestObj("champi.obj", 1.0f, "mushroom.bmp"));
+	champi->pos = Vector3(-4.0f, 0.0f, 6.f);
+	champi->scale = Vector3(0.015f);
+	champi->euler.y = GH_PI / 2;
+	objs.push_back(champi);
 
 	player.SetPosition(Vector3(0, GH_PLAYER_HEIGHT, 0));
 }
