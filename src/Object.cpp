@@ -18,7 +18,17 @@ void Object::Reset() {
   scale.SetOnes();
   p_scale = 1.0f;
 }
+void Object::setAnimator(std::shared_ptr<Animator> anim) {
+	m_animator = anim;
+}
 
+//void Object::addAnimation(Animation anim) {
+//	m_animator->addAnimation(anim);
+//}
+//
+//void Object::Update() {
+//	m_animator->Update(*this);
+//}
 void Object::Draw(const Camera& cam, uint32_t curFBO) {
   if (shader && mesh) {
 	const Matrix4 m = LocalToWorld();

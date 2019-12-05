@@ -3,6 +3,7 @@
 #include "HumbugEngine/Vector.h"
 #include "HumbugEngine/Camera.h"
 #include "HumbugEngine/Sphere.h"
+
 #include <vector>
 #include <memory>
 
@@ -13,19 +14,25 @@ class Texture;
 class Shader;
 class Material;
 
+
 class Object {
+	
 public:
   Object();
   virtual ~Object() {}
 
   virtual void Reset();
   virtual void Draw(const Camera& cam, uint32_t curFBO);
-  virtual void Update() {};
+  virtual void Update();
   virtual void OnHit(Object& other, Vector3& push) {};
 
   //Casts
   virtual Physical* AsPhysical() { return nullptr; }
   const Physical* AsPhysical() const { return const_cast<Object*>(this)->AsPhysical(); }
+
+  ////Anim
+  //void setAnimator(std::shared_ptr<Animator> anim);
+  //void addAnimation(Animation anim);
 
   void DebugDraw(const Camera& cam);
 
@@ -44,5 +51,6 @@ public:
   std::shared_ptr<Texture> texture;
   std::shared_ptr<Shader> shader;
   std::shared_ptr<Material> material;
+  //std::shared_ptr<Animator> m_animator;
 };
 typedef std::vector<std::shared_ptr<Object>> PObjectVec;
