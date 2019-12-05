@@ -1,5 +1,6 @@
 #include "HumbugEngine/Level2.h"
 #include "HumbugEngine/House.h"
+#include "HumbugEngine/Animator.h"
 
 void Level2::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, Player& player) {
 	lights.push_back(player.getTorch());
@@ -79,6 +80,14 @@ void Level2::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, Play
     Portal::Connect(portal2->front, portal3->back);
     Portal::Connect(portal3->front, portal1->back);
   }
+
+  std::shared_ptr<Object> cat(std::make_shared<Object>());
+  cat->pos = Vector3(0, 0, 0);
+  cat->scale = Vector3(2.0f, 2.0f, 2.0f);
+  std::shared_ptr <Animator> animator;
+  cat->setAnimator(animator);
+  objs.push_back(cat);
+
 
   player.SetPosition(Vector3(3, GH_PLAYER_HEIGHT, 3));
 }
