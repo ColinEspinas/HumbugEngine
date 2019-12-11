@@ -1,15 +1,25 @@
 #pragma once
-#include "HumbugEngine/AnimationKey.h"
+#include "HumbugEngine/Function.h"
+#include "HumbugEngine/GameHeader.h"
+#include <memory>
 
-class Animation {
+
+class Animation
+{
 public:
 	Animation();
-	void CreateKeyAnim();
-	AnimationKey getKey(int i);
+	float getValue(float time);
+	bool canRun();
+
+	bool AddKey(float time, float value, bool disableComputeByForce = false);
+
+	bool loop;
+	bool smooth;
+	float speed;
 
 private:
-	std::vector<AnimationKey> m_keys;
-	bool m_loop;
-	bool m_smooth;
-	float m_kspeed;
+	std::vector<std::shared_ptr<AnimationKey>> m_keys;
+
+	void Compute();
+	std::vector<std::shared_ptr<Function>> m_funcs;
 };

@@ -3,6 +3,8 @@
 #include "HumbugEngine/Ressources/Objects/TestObj.h"
 #include "HumbugEngine/Ressources/Objects/MazeRoom/Maze.h"
 
+#include "HumbugEngine/Animator.h"
+
 void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, Player & player)
 {
 	lights.push_back(player.getTorch());
@@ -56,6 +58,14 @@ void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, P
 
 	//*//
 	std::shared_ptr<TestObj> testOBJ(new TestObj("Church.obj", 15e-3f));
+
+	// Animations
+	testOBJ->animator->Build({
+		{ {1,1}, { {2,0},		{6,3.14f},		{10,0} } },
+		{ {0,1}, { {2,0},		{5,-2},			{8,0} } },
+		{ {2,1}, { {2,15e-3f},	{6,30e-3f},		{10,15e-3f} } }
+	});
+
 	//testOBJ->pos += Vector3(5.0f, 0, 0);
 	objs.push_back(testOBJ);
 

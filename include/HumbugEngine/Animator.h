@@ -4,19 +4,39 @@
 #include "HumbugEngine/GameHeader.h"
 #include "HumbugEngine/Timer.h"
 #include <vector>
+#include <array>
+
+
+namespace AnimationType
+{
+	enum METHOD
+	{
+		TRANSLATION = 0,
+		ROTATION = 1,
+		SCALE = 2
+	};
+
+	enum AXIS
+	{
+		X = 0,
+		Y = 1,
+		Z = 2
+	};
+}
 
 
 class Animator {
 private:
-	//std::vector<Animation> m_lstAnim;
+	float localTimer;
 	int index;
-	std::vector<std::vector<Animation>> m_lstAnim;
-	Timer timer;
+	std::array<std::array<std::shared_ptr<Animation>,3>,3> m_lstAnim;
+	Object* m_target;
 
 public:
-	Animator();
-	void addTransformAnimation(Animation anim);
-	void addRotationAnimation(Animation anim);
-	void addScaleAnimation(Animation anim);
-	void Update(std::shared_ptr<Object> obj);
+	Animator(Object* obj, int id = 0);
+	void Update();
+
+	void Build(std::vector<std::pair<std::array<int,2>,std::vector<std::array<float,2>>>> content);
+
+	std::shared_ptr<Animation> getAnimation(AnimationType::METHOD _m, AnimationType::AXIS _a);
 };

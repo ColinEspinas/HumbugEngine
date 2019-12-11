@@ -1,25 +1,27 @@
 #include "HumbugEngine/AnimationKey.h"
 
 AnimationKey::AnimationKey(float timeStamp, float value) {
-	m_key[0] = timeStamp;
-	m_key[1] = value;
+	m_time = timeStamp;
+	m_value = value;
 }
+
 float AnimationKey::getTimeStamp() {
-	return m_key[0];
+	return m_time;
 }
+
 float AnimationKey::getValue() {
-	return m_key[1];
+	return m_value;
 }
+
 void AnimationKey::setTimeStamp(float timeStamp) {
-	m_key[0] = timeStamp;
+	m_time = timeStamp;
 }
+
 void AnimationKey::setValue(float value) {
-	m_key[1] = value;
+	m_value = value;
 }
-std::vector<float> AnimationKey::get() {
-	return m_key;
-}
+
 void AnimationKey::set(float timeStamp, float value) {
-	m_key[0] = timeStamp;
-	m_key[1] = value;
+	m_time = timeStamp;
+	m_value = value;
 }

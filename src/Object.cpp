@@ -3,13 +3,17 @@
 #include "HumbugEngine/Shader.h"
 #include "HumbugEngine/Texture.h"
 #include "HumbugEngine/Player.h"
+#include "HumbugEngine/Animator.h"
+
 
 Object::Object() :
   pos(0.0f),
   euler(0.0f),
   scale(1.0f),
-  p_scale(1.0f) {
+  p_scale(1.0f)
+{
 	if (!material) material = std::make_shared<Material>("__Default");
+	animator = std::make_shared<Animator>(this);
 }
 
 void Object::Reset() {
@@ -18,17 +22,11 @@ void Object::Reset() {
   scale.SetOnes();
   p_scale = 1.0f;
 }
-void Object::setAnimator(std::shared_ptr<Animator> anim) {
-	m_animator = anim;
+
+void Object::Update() {
+	animator->Update();
 }
 
-//void Object::addAnimation(Animation anim) {
-//	m_animator->addAnimation(anim);
-//}
-//
-//void Object::Update() {
-//	m_animator->Update(*this);
-//}
 void Object::Draw(const Camera& cam, uint32_t curFBO) {
   if (shader && mesh) {
 	const Matrix4 m = LocalToWorld();

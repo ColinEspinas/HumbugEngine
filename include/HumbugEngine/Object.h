@@ -13,6 +13,7 @@ class Mesh;
 class Texture;
 class Shader;
 class Material;
+class Animator;
 
 
 class Object {
@@ -29,10 +30,6 @@ public:
   //Casts
   virtual Physical* AsPhysical() { return nullptr; }
   const Physical* AsPhysical() const { return const_cast<Object*>(this)->AsPhysical(); }
-
-  ////Anim
-  //void setAnimator(std::shared_ptr<Animator> anim);
-  //void addAnimation(Animation anim);
 
   void DebugDraw(const Camera& cam);
 
@@ -51,6 +48,7 @@ public:
   std::shared_ptr<Texture> texture;
   std::shared_ptr<Shader> shader;
   std::shared_ptr<Material> material;
-  //std::shared_ptr<Animator> m_animator;
+  
+  std::shared_ptr<Animator> animator;
 };
 typedef std::vector<std::shared_ptr<Object>> PObjectVec;
