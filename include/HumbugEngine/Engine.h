@@ -15,6 +15,8 @@
 #include <memory>
 #include <vector>
 
+#include "HumbugEngine/UIQuad.h"
+
 class Engine {
 public:
   Engine();
@@ -59,6 +61,7 @@ private:
   std::vector<std::shared_ptr<Object>> vObjects;
   std::vector<std::shared_ptr<Portal>> vPortals;
   std::vector<std::shared_ptr<Light>> vLights;
+  std::vector<std::shared_ptr<UIQuad>> vQuads;
   std::shared_ptr<Sky> sky;
 
   std::shared_ptr<FreeCamera> freeCamera;

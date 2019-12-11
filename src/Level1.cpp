@@ -2,7 +2,7 @@
 #include "HumbugEngine/Tunnel.h"
 #include "HumbugEngine/Ground.h"
 
-void Level1::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, Player& player)
+void Level1::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, PQuadVec& quads, Player& player)
 {
 	lights.push_back(player.getTorch());
 

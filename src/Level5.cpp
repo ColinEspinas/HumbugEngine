@@ -2,7 +2,7 @@
 #include "HumbugEngine/Tunnel.h"
 #include "HumbugEngine/Ground.h"
 
-void Level5::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, Player& player) {
+void Level5::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, PQuadVec& quads, Player& player) {
 	lights.push_back(player.getTorch());
 
   std::shared_ptr<Tunnel> tunnel1(new Tunnel(Tunnel::SCALE));

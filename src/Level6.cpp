@@ -1,7 +1,7 @@
 #include "HumbugEngine/Level6.h"
 #include "HumbugEngine/Floorplan.h"
 
-void Level6::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, Player& player) {
+void Level6::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, PQuadVec& quads, Player& player) {
 
 	lights.push_back(player.getTorch());
 	lights.push_back(std::shared_ptr<PointLight>(new PointLight(Vector3(0.0f, 2.0f, 0.0f), 1.0f, 0.09f, 0.032f, Vector3(1.0f, 1.0f, 1.0f), Vector3(1.0f, 0.8f, 0.8f))));

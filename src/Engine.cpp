@@ -169,12 +169,13 @@ void Engine::LoadScene(int ix) {
   vObjects.clear();
   vPortals.clear();
   vLights.clear();
+  vQuads.clear();
   player->Reset();
   freeCamera->Reset();
 
   //Create new scene
   curScene = vScenes[ix];
-  curScene->Load(vObjects, vLights, vPortals, *player);
+  curScene->Load(vObjects, vLights, vPortals, vQuads, *player);
   vObjects.push_back(player);
   vObjects.push_back(freeCamera);
   curFocus = player;
@@ -262,6 +263,11 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
   for (size_t i = 0; i < vObjects.size(); ++i) {
     vObjects[i]->Draw(cam, curFBO);
 	lighting.RenderLights(vObjects[i]);
+  }
+
+  // Draw UI
+  for (size_t i = 0; i < vQuads.size(); ++i){
+    vQuads[i]->Draw(cam, curFBO);
   }
 
   //Draw portals if possible

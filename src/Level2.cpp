@@ -2,7 +2,7 @@
 #include "HumbugEngine/House.h"
 #include "HumbugEngine/Animator.h"
 
-void Level2::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, Player& player) {
+void Level2::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, PQuadVec& quads, Player& player) {
 	lights.push_back(player.getTorch());
 
   std::shared_ptr<House> house1(std::make_shared<House>("three_room.bmp"));

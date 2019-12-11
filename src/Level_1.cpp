@@ -5,7 +5,7 @@
 
 #include "HumbugEngine/Animator.h"
 
-void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, Player & player)
+void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, PQuadVec& quads, Player & player)
 {
 	lights.push_back(player.getTorch());
 
@@ -72,6 +72,10 @@ void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, P
 	std::shared_ptr<Ground> ground(std::make_shared<Ground>());
 	ground->scale *= 1.2f;
 	objs.push_back(ground);
+
+
+	std::shared_ptr<UIQuad> _quad(new UIQuad("Bush.bmp"));
+	quads.push_back(_quad);
 	//*/
 
 	player.SetPosition(Vector3(0, GH_PLAYER_HEIGHT, 0));

@@ -30,12 +30,6 @@ float Animation::getValue(float time)
 		}
 	}
 
-	// DEBUG //
-	for (auto key : m_keys)
-		std::cout << key->getTimeStamp() << " ";
-	std::cout << std::endl;
-	// DEBUG //
-
 	// Odd Cases
 	if (time <= (*m_keys.begin())->getTimeStamp())
 		return (*m_keys.begin())->getValue();

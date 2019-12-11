@@ -4,7 +4,7 @@
 #include "HumbugEngine/Statue.h"
 #include "HumbugEngine/PillarRoom.h"
 
-void Level3::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, Player& player) {
+void Level3::Load(PObjectVec& objs, PLightVec& lights, PPortalVec& portals, PQuadVec& quads, Player& player) {
 	lights.push_back(player.getTorch());
 
   //Room 1
