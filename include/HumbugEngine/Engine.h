@@ -10,6 +10,7 @@
 #include "HumbugEngine/Sky.h"
 #include "HumbugEngine/Lighting.h"
 #include "HumbugEngine/FreeCamera.h"
+#include "HumbugEngine/UIQuad.h"
 #include <GL/glew.h>
 #include <windows.h>
 #include <memory>
@@ -59,6 +60,8 @@ private:
   std::vector<std::shared_ptr<Object>> vObjects;
   std::vector<std::shared_ptr<Portal>> vPortals;
   std::vector<std::shared_ptr<Light>> vLights;
+  std::vector<std::shared_ptr<UIQuad>> vUIQuads;
+
   std::shared_ptr<Sky> sky;
 
   std::shared_ptr<FreeCamera> freeCamera;

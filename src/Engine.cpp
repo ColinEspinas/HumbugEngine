@@ -57,6 +57,8 @@ Engine::Engine() : hWnd(NULL), hDC(NULL), hRC(NULL) {
   LoadScene(0);
 
   sky.reset(new Sky);
+
+  vUIQuads.push_back(std::make_shared<UIQuad>("test"));
 }
 
 Engine::~Engine() {
@@ -307,7 +309,13 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
 #endif
 
   // Draw UI
-  //main_cam.UseOrthoMatrix(0, (float)iWidth, (float)iHeight, 0, -1, 1);
+  main_cam.UseOrthoMatrix(0, (float)iWidth, (float)iHeight, 0, -1.0f, 1.0f);
+  glMatrixMode(GL_MODELVIEW);
+  //std::cout << "Cam Matrix:" << std::endl << main_cam.Matrix() << std::endl << std::endl;
+
+   for (size_t i = 0; i < vUIQuads.size(); ++i) {
+     vUIQuads[i]->Draw();
+   }
 }
 
 LRESULT Engine::WindowProc(HWND hCurWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {

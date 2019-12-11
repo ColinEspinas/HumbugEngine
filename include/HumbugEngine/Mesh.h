@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 
-#include "Material.h"
+#include "HumbugEngine/Material.h"
 
 class Mesh {
 public:
