@@ -74,7 +74,7 @@ void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, P
 	objs.push_back(ground);
 
 
-	std::shared_ptr<UIQuad> _quad(new UIQuad("Bush.bmp"));
+	std::shared_ptr<UIQuad> _quad(new UIQuad("footer"));
 	quads.push_back(_quad);
 	//*/
 

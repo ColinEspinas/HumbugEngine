@@ -36,3 +36,15 @@ std::shared_ptr<Texture> AquireTexture(const char* name, int rows, int cols) {
     return tex.lock();
   }
 }
+
+std::shared_ptr<UIPattern> AquirePattern(const char* name) {
+  static std::unordered_map<std::string, std::weak_ptr<UIPattern>> map;
+  std::weak_ptr<UIPattern>& pattern = map[std::string(name)];
+  if (pattern.expired()) {
+    std::shared_ptr<UIPattern> newPattern(std::make_shared<UIPattern>(std::string(name)));
+    pattern = newPattern;
+    return newPattern;
+  } else {
+    return pattern.lock();
+  }
+}

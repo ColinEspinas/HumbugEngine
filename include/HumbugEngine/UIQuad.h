@@ -16,6 +16,7 @@ public:
 
     std::shared_ptr<Texture> texture;
     std::shared_ptr<Shader> shader;
+    std::shared_ptr<UIPattern> pattern;
 
 private:
     std::vector<float> verts;
