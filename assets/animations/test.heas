@@ -1,0 +1,13 @@
+build rotation y -l -s
+0 0
+2 3.142
+4 6.283
+
+build translation x -l
+0 -8
+2 8
+4 -8
+
+build scale z
+0 1
+12 3

@@ -4,6 +4,7 @@
 #include "HumbugEngine/Ressources/Objects/MazeRoom/Maze.h"
 
 #include "HumbugEngine/Animator.h"
+#include "HumbugEngine/Ressources/Objects/Car.h"
 
 void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, PQuadVec& quads, Player & player)
 {
@@ -57,25 +58,28 @@ void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, P
 	
 
 	//*//
-	std::shared_ptr<TestObj> testOBJ(new TestObj("Church.obj", 15e-3f));
+	// std::shared_ptr<TestObj> testOBJ(new TestObj("Church.obj", 15e-3f));
 
-	// Animations
-	testOBJ->animator->Build({
-		{ {1,1}, { {2,0},		{6,3.14f},		{10,0} } },
-		{ {0,1}, { {2,0},		{5,-2},			{8,0} } },
-		{ {2,1}, { {2,15e-3f},	{6,30e-3f},		{10,15e-3f} } }
-	});
+	// // Animations
+	// testOBJ->animator->Build({
+	// 	{ {1,1}, { {2,0},		{6,3.14f},		{10,0} } },
+	// 	{ {0,1}, { {2,0},		{5,-2},			{8,0} } },
+	// 	{ {2,1}, { {2,15e-3f},	{6,30e-3f},		{10,15e-3f} } }
+	// });
 
-	//testOBJ->pos += Vector3(5.0f, 0, 0);
-	objs.push_back(testOBJ);
+	// //testOBJ->pos += Vector3(5.0f, 0, 0);
+	// objs.push_back(testOBJ);
+
+	std::shared_ptr<Car> car(std::make_shared<Car>());
+	car->scale *= .8f;
+	objs.push_back(car);
 
 	std::shared_ptr<Ground> ground(std::make_shared<Ground>());
 	ground->scale *= 1.2f;
 	objs.push_back(ground);
 
-
-	std::shared_ptr<UIQuad> _quad(new UIQuad("footer"));
-	quads.push_back(_quad);
+	std::shared_ptr<UIQuad> _logo(new UIQuad("logo"));
+	quads.push_back(_logo);
 	//*/
 
 	player.SetPosition(Vector3(0, GH_PLAYER_HEIGHT, 0));

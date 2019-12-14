@@ -62,10 +62,10 @@ UIPattern::UIPattern(std::string _fileName)
             // Append Triangles
             AddTriangle(
                 { verts_palette[a - 1], verts_palette[c - 1], verts_palette[b - 1] },
-                { uvs_palette[a - 1], uvs_palette[c - 1], uvs_palette[b - 1] });
+                { uvs_palette[ct - 1], uvs_palette[dt - 1], uvs_palette[at - 1] });
             AddTriangle(
                 { verts_palette[a - 1], verts_palette[d - 1], verts_palette[c - 1] },
-                { uvs_palette[a - 1], uvs_palette[d - 1], uvs_palette[c - 1] });
+                { uvs_palette[bt - 1], uvs_palette[ct - 1], uvs_palette[at - 1] });
         }
     }
 }

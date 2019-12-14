@@ -9,5 +9,9 @@ in vec2 ex_uv;
 out vec4 gl_FragColor;
 
 void main(void) {
-	gl_FragColor = vec4(texture(tex, ex_uv).rgb, 1.0);
+	if (texture(tex, ex_uv).rgb == vec3(1.0,0.0,1.0)) {
+		gl_FragColor = vec4(0.0,0.0,0.0,0.0);
+	} else {
+		gl_FragColor = vec4(texture(tex, ex_uv).rgb, 1.0);
+	}
 } 

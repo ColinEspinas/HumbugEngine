@@ -48,3 +48,15 @@ std::shared_ptr<UIPattern> AquirePattern(const char* name) {
     return pattern.lock();
   }
 }
+
+std::shared_ptr<Sequence> AquireSequence(const char* name) {
+  static std::unordered_map<std::string, std::weak_ptr<Sequence>> map;
+  std::weak_ptr<Sequence>& seq = map[std::string(name)];
+  if (seq.expired()) {
+    std::shared_ptr<Sequence> newSequence(std::make_shared<Sequence>(std::string(name)));
+    seq = newSequence;
+    return newSequence;
+  } else {
+    return seq.lock();
+  }
+}

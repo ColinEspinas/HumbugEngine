@@ -56,3 +56,10 @@ std::shared_ptr<Animation> Animator::getAnimation(AnimationType::METHOD _m, Anim
 {
 	return m_lstAnim[(int)_m][(int)_a];
 }
+
+void Animator::LoopAll(bool state)
+{
+	for (int ii = 0; ii < 3; ++ii)
+		for (int jj = 0; jj < 3; ++jj)
+			m_lstAnim[ii][jj]->loop = state;
+}
