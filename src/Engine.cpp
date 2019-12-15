@@ -134,6 +134,13 @@ int Engine::Run() {
 		  shouldConfineCursor = !shouldConfineCursor;
 	  if (input.key_press['O'])
 		  shouldDrawColliders = !shouldDrawColliders;
+    if (input.key_press['L'])
+    {
+      GH_APPLY_COMPLEXED_LIGHTING = !GH_APPLY_COMPLEXED_LIGHTING;
+      std::cout<<"Lighting: " << GH_APPLY_COMPLEXED_LIGHTING << std::endl; //DEBUG
+      for (auto obj : vObjects)
+        obj->ReloadShader(GH_APPLY_COMPLEXED_LIGHTING);
+    }
 
       //Used fixed time steps for updates
       const int64_t new_ticks = timer.GetTicks();

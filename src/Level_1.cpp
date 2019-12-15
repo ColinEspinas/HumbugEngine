@@ -7,8 +7,8 @@ void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, P
 {
 	lights.push_back(player.getTorch());
 
-	//Maze M(3);
-	//M.Apply(objs, portals);
+	// Maze M(3, 2, 16, 16);
+	// M.Apply(objs, portals);
 
 
 	/*//

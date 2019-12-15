@@ -28,6 +28,7 @@ public:
   const Physical* AsPhysical() const { return const_cast<Object*>(this)->AsPhysical(); }
 
   void DebugDraw(const Camera& cam);
+  void ReloadShader(bool complexLighting);
 
   std::shared_ptr<Shader> LoadLightAdaptedShader();
 

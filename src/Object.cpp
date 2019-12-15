@@ -54,7 +54,13 @@ void Object::DebugDraw(const Camera& cam) {
   }
 }
 
+void Object::ReloadShader(bool complexLighting) {
+  GH_APPLY_COMPLEXED_LIGHTING = complexLighting;
+  shader = LoadLightAdaptedShader();
+}
+
 std::shared_ptr<Shader> Object::LoadLightAdaptedShader(){
+  std::cout<<GH_APPLY_COMPLEXED_LIGHTING<<" "; //DEBUG
   if (GH_APPLY_COMPLEXED_LIGHTING)
     return AquireShader("texture");
   else return AquireShader("texture_old");
