@@ -6,7 +6,7 @@
 Animation::Animation()
 {
 	m_keys = std::vector<std::shared_ptr<AnimationKey>>();
-	loop = true;
+	loop = false;
 	smooth = false;
 	speed = 1.0f;
 }

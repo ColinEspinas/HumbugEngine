@@ -11,30 +11,32 @@ Sequence::Sequence(std::string fname)
     if (!fin) return;
 
     // Init
-    int LastIndex = -1, _tCount = 0;
+    int LastIndex = -1;
     tMethod = 0;
     tAxis = 0;
+    for (int ii=0; ii<3; ++ii)
+        for (int jj=0; jj<3; ++jj)
+            for (int kk=0; kk<2; ++kk)
+                saved_Config[ii][jj][kk] = false;
 
     // Read File
     std::string line;
     while (!fin.eof())
     {
+        std::getline(fin, line);
+
         if (line.find("build ") == 0)
         {
+            // Init & Verif
+            line += " 0";
+            std::vector<std::string> tContent; std::string tStr;
             std::stringstream ss(line.c_str() + 6);
 
-            // Init & Verif
-            if (*line.rbegin() != ' ') line.push_back(' ');
-            line.push_back('0');
-            std::vector<std::string> tContent; std::string tStr;
-
-            // Fille String Content
-            _tCount = 0;
+            // Fill String Content
             do {
                 ss >> tStr;
                 tContent.push_back(tStr);
-                _tCount++;
-            } while (tStr != "0" && _tCount < 5);
+            } while (tStr != "0");
             tContent.pop_back();
 
             // Read each Content String
@@ -72,17 +74,6 @@ Sequence::Sequence(std::string fname)
             saved_Keys[tMethod][tAxis].push_back({t,v});
         }
     }
-
-
-    // DEBUG //
-    std::cout << "Key: " << fname << std::endl;
-    for (int ii = 0; ii < 3; ++ii)
-        for (int jj = 0; jj < 3; ++jj)
-        {
-            for (int kk = 0; kk < saved_Keys[ii][jj].size(); ++kk)
-                std::cout << saved_Keys[ii][jj][kk][0] << "|" << saved_Keys[ii][jj][kk][1] << "   ";
-            std::cout << std::endl;
-        }
 }
 
 void Sequence::Apply(std::shared_ptr<Animator> anim)
@@ -91,13 +82,15 @@ void Sequence::Apply(std::shared_ptr<Animator> anim)
         for (int jj = 0; jj < 3; ++jj)
         {
             for (int kk = 0; kk < saved_Keys[ii][jj].size(); ++kk)
-                anim->getAnimation((AnimationType::METHOD)ii, (AnimationType::AXIS)jj)
-                    ->AddKey(saved_Keys[ii][jj][kk][0], saved_Keys[ii][jj][kk][1]);
+                anim->addKeyTo((AnimationType::METHOD)ii, (AnimationType::AXIS)jj,
+                    saved_Keys[ii][jj][kk][0], saved_Keys[ii][jj][kk][1]);
             anim->getAnimation((AnimationType::METHOD)ii, (AnimationType::AXIS)jj)
                 ->loop = saved_Config[ii][jj][0];
             anim->getAnimation((AnimationType::METHOD)ii, (AnimationType::AXIS)jj)
                 ->smooth = saved_Config[ii][jj][1];
         }
+    
+    //for (int ii=0; ii<3; ++ii) for (int jj=0; jj<3; ++jj) std::cout<<"Loop: "<<saved_Config[ii][jj][0]<<" | Smooth: "<<saved_Config[ii][jj][1]<<std::endl; //DEBUG
 }
 
 int Sequence::ComputeIndex(int method, int axis)

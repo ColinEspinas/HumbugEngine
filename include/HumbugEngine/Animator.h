@@ -39,5 +39,6 @@ public:
 	void Build(std::vector<std::pair<std::array<int,2>,std::vector<std::array<float,2>>>> content);
 
 	std::shared_ptr<Animation> getAnimation(AnimationType::METHOD _m, AnimationType::AXIS _a);
+	void addKeyTo(AnimationType::METHOD _m, AnimationType::AXIS _a, float _time, float _value);
 	void LoopAll(bool state = true);
 };

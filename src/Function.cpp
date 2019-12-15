@@ -67,7 +67,7 @@ Function::Function(std::shared_ptr<AnimationKey> key1, std::shared_ptr<Animation
 float Function::getValue(float time, bool smooth)
 {
 	if (time < startKey->getTimeStamp() || time > endKey->getTimeStamp()) return 0;
-	if (smooth) return m_coeffs[0] * pow(time, 3) + m_coeffs[1] * pow(time, 2) + m_coeffs[2] * time + m_coeffs[3];
+	// if (smooth) return m_coeffs[0] * pow(time, 3) + m_coeffs[1] * pow(time, 2) + m_coeffs[2] * time + m_coeffs[3];
 	else return startKey->getValue() + (endKey->getValue() - startKey->getValue())
 		* (time - startKey->getTimeStamp()) / (endKey->getTimeStamp() - startKey->getTimeStamp());
 }

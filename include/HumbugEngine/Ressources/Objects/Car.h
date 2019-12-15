@@ -16,8 +16,8 @@ public:
         shader = AquireShader("texture");
         texture = AquireTexture("white.bmp");
 
-        // sequence = AquireSequence("test");
-        // sequence->Apply(animator);
+        sequence = AquireSequence("test");
+        sequence->Apply(animator);
 
         // animator->LoopAll();
         // animator->Build({

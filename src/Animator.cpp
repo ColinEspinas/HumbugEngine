@@ -57,6 +57,11 @@ std::shared_ptr<Animation> Animator::getAnimation(AnimationType::METHOD _m, Anim
 	return m_lstAnim[(int)_m][(int)_a];
 }
 
+void Animator::addKeyTo(AnimationType::METHOD _m, AnimationType::AXIS _a, float _time, float _value)
+{
+	m_lstAnim[(int)_m][(int)_a]->AddKey(_time, _value);
+}
+
 void Animator::LoopAll(bool state)
 {
 	for (int ii = 0; ii < 3; ++ii)
