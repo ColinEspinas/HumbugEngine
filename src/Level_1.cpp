@@ -5,6 +5,7 @@
 
 #include "HumbugEngine/Animator.h"
 #include "HumbugEngine/Ressources/Objects/Car.h"
+#include "HumbugEngine/Ressources/Objects/JellyFish.h"
 
 void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, PQuadVec& quads, Player & player)
 {
@@ -70,9 +71,14 @@ void Level_1::Load(PObjectVec & objs, PLightVec& lights, PPortalVec & portals, P
 	// //testOBJ->pos += Vector3(5.0f, 0, 0);
 	// objs.push_back(testOBJ);
 
-	std::shared_ptr<Car> car(std::make_shared<Car>());
-	car->scale *= .8f;
-	objs.push_back(car);
+	//std::shared_ptr<Car> car(std::make_shared<Car>());
+	//car->scale *= .8f;
+	//objs.push_back(car);
+
+	// a changer
+	/*std::shared_ptr<JellyFish> jellyFish(std::make_shared<JellyFish>());
+	jellyFish->scale *= 0.01f;
+	objs.push_back(jellyFish);*/
 
 	std::shared_ptr<Ground> ground(std::make_shared<Ground>());
 	ground->scale *= 1.2f;

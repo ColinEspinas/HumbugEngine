@@ -1,0 +1,10 @@
+
+build translation x -l
+0 -8
+2 8
+4 -8
+
+build scale z
+0 1
+2 3
+4 1
